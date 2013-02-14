@@ -7,7 +7,8 @@
 //
 
 #import "BFViewController.h"
-#import "BFTabCircleRenderer.h"
+#import "BFTabRenderer.h"
+#import "BFBezierButton.h"
 
 @interface BFViewController ()
 
@@ -23,13 +24,17 @@
 	UIPanGestureRecognizer *gr = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
 	[self.view addGestureRecognizer:gr];
 	
+	CGPoint points[4] = {CGPointMake(150, 200), CGPointMake(80, 100), CGPointMake(230, 100), CGPointMake(160, 200)};
+	UIBezierPath *bezier = [BFTabRenderer bezierPathWithPoints:points circleCenter:CGPointMake(155, 205)];
+	BFBezierButton *b = [[BFBezierButton alloc] initWithBezierPath:bezier];
+	[self.view addSubview:b];
 }
 
 - (void)handleTap:(UIPanGestureRecognizer *)gr {
 	CGPoint location = [gr locationInView:self.view];
-	self.controlPoint.center = [BFTabCircleRenderer controlPointForPoint:location
+	self.controlPoint.center = [BFTabRenderer controlPointForPoint:location
 															circleCenter:self.centerView.center
-															 orientation:BFCircleOrientationClockwise];
+															 orientation:BFCircleOrientationCounterClockwise];
 }
 
 - (void)didReceiveMemoryWarning

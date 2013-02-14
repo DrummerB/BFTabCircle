@@ -6,31 +6,37 @@
 //  Copyright (c) 2013 Balazs Faludi. All rights reserved.
 //
 
-#import "BFTabCircleRenderer.h"
+#import "BFTabRenderer.h"
 
 #define KAPPA 0.5522847498
 
 
 
-@implementation BFTabCircleRenderer
+@implementation BFTabRenderer
 
 //  1 \--------/ 2
 //     \      /
 //      \    /
 //     0 \--/ 3
 + (UIBezierPath *)bezierPathWithPoints:(CGPoint *)points circleCenter:(CGPoint)center {
-	
+	CGPoint controlPoint1, controlPoint2;
 	UIBezierPath* bezier3Path = [UIBezierPath bezierPath];
-	[bezier3Path moveToPoint: points[0]]; 
-	[bezier3Path addCurveToPoint: points[1] controlPoint1: CGPointMake(96.36, 33.44)
-				   controlPoint2: points[0]];
-	[bezier3Path addCurveToPoint: points[2] controlPoint1: CGPointMake(138.63, 9.34)
-				   controlPoint2: CGPointMake(181.39, 14.98)];
-	[bezier3Path addCurveToPoint: points[3] controlPoint1: CGPointMake(193.4, 74.23)
-				   controlPoint2: CGPointMake(214.01, 33.4)];
-	[bezier3Path addCurveToPoint: points[0] controlPoint1: CGPointMake(159.67, 109.57)
-				   controlPoint2: CGPointMake(155.35, 108.03)];
+	[bezier3Path moveToPoint: points[0]];
+	
+	[bezier3Path addCurveToPoint:points[1] controlPoint1:points[1] controlPoint2:points[0]];
+	
+	controlPoint1 = [self controlPointForPoint:points[1] circleCenter:center orientation:BFCircleOrientationClockwise];
+	controlPoint2 = [self controlPointForPoint:points[2] circleCenter:center orientation:BFCircleOrientationCounterClockwise];
+	[bezier3Path addCurveToPoint:points[2] controlPoint1:controlPoint1 controlPoint2:controlPoint2];
+	
+	[bezier3Path addCurveToPoint:points[3] controlPoint1:points[3] controlPoint2:points[2]];
+
+	controlPoint1 = [self controlPointForPoint:points[3] circleCenter:center orientation:BFCircleOrientationCounterClockwise];
+	controlPoint2 = [self controlPointForPoint:points[0] circleCenter:center orientation:BFCircleOrientationClockwise];
+	[bezier3Path addCurveToPoint:points[0] controlPoint1:controlPoint1 controlPoint2:controlPoint2];
+	
 	[bezier3Path closePath];
+	return bezier3Path;
 }
 
 + (CGPoint)controlPointForPoint:(CGPoint)point circleCenter:(CGPoint)center orientation:(BFCircleOrientation)orientation {
@@ -40,12 +46,12 @@
 	CGFloat length = radius * KAPPA;
 	CGFloat angle = atanf(tangentSlope);
 	if (diff.y > 0) orientation *= -1;
+//	return point;
 	return CGPointMake(point.x + orientation * length * cosf(angle),
 					   point.y + orientation * length * sinf(angle));
 }
 
-+ (void)renderTabWithPoints:(CGPoint *)points {
-	
++ (void)renderTabWithBezierPath:(UIBezierPath *)bezierPath {
 	
 	//// General Declarations
 	CGContextRef context = UIGraphicsGetCurrentContext();
@@ -61,27 +67,16 @@
 	CGFloat innerShadowBlurRadius = 1.5;
 	
 	//// Bezier 3 Drawing
-	UIBezierPath* bezier3Path = [UIBezierPath bezierPath];
-	[bezier3Path moveToPoint: CGPointMake(140.5, 113.5)];
-	[bezier3Path addCurveToPoint: CGPointMake(95.5, 32.5) controlPoint1: CGPointMake(96.36, 33.44)
-				   controlPoint2: CGPointMake(140.43, 112.83)];
-	[bezier3Path addCurveToPoint: CGPointMake(215.5, 32.5) controlPoint1: CGPointMake(138.63, 9.34)
-				   controlPoint2: CGPointMake(181.39, 14.98)];
-	[bezier3Path addCurveToPoint: CGPointMake(170.5, 113.5) controlPoint1: CGPointMake(193.4, 74.23)
-				   controlPoint2: CGPointMake(214.01, 33.4)];
-	[bezier3Path addCurveToPoint: CGPointMake(140.5, 113.5) controlPoint1: CGPointMake(159.67, 109.57)
-				   controlPoint2: CGPointMake(155.35, 108.03)];
-	[bezier3Path closePath];
 	[strokeColor setFill];
-	[bezier3Path fill];
+	[bezierPath fill];
 	
 	////// Bezier 3 Inner Shadow
-	CGRect bezier3BorderRect = CGRectInset([bezier3Path bounds], -innerShadowBlurRadius, -innerShadowBlurRadius);
+	CGRect bezier3BorderRect = CGRectInset([bezierPath bounds], -innerShadowBlurRadius, -innerShadowBlurRadius);
 	bezier3BorderRect = CGRectOffset(bezier3BorderRect, -innerShadowOffset.width, -innerShadowOffset.height);
-	bezier3BorderRect = CGRectInset(CGRectUnion(bezier3BorderRect, [bezier3Path bounds]), -1, -1);
+	bezier3BorderRect = CGRectInset(CGRectUnion(bezier3BorderRect, [bezierPath bounds]), -1, -1);
 	
 	UIBezierPath* bezier3NegativePath = [UIBezierPath bezierPathWithRect: bezier3BorderRect];
-	[bezier3NegativePath appendPath: bezier3Path];
+	[bezier3NegativePath appendPath: bezierPath];
 	bezier3NegativePath.usesEvenOddFillRule = YES;
 	
 	CGContextSaveGState(context);
@@ -93,7 +88,7 @@
 									innerShadowBlurRadius,
 									innerShadow.CGColor);
 		
-		[bezier3Path addClip];
+		[bezierPath addClip];
 		CGAffineTransform transform = CGAffineTransformMakeTranslation(-round(bezier3BorderRect.size.width), 0);
 		[bezier3NegativePath applyTransform: transform];
 		[[UIColor grayColor] setFill];
@@ -102,11 +97,9 @@
 	CGContextRestoreGState(context);
 	
 	[fillColor setStroke];
-	bezier3Path.lineWidth = 1;
-	[bezier3Path stroke];
+	bezierPath.lineWidth = 1;
+	[bezierPath stroke];
 	
-	
-
 }
 
 @end
