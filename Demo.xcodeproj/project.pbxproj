@@ -1,0 +1,452 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EC22E91F16CD5D6A002AC20F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECCFD4C016CC2214006C8101 /* Foundation.framework */; };
+		EC22E92416CD5D6A002AC20F /* BFTabCircle.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC22E92316CD5D6A002AC20F /* BFTabCircle.h */; };
+		EC22E92616CD5D6A002AC20F /* BFTabCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EC22E92516CD5D6A002AC20F /* BFTabCircle.m */; };
+		EC22E92C16CD5D81002AC20F /* libBFTabCircle.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC22E91E16CD5D6A002AC20F /* libBFTabCircle.a */; };
+		EC22E92F16CD5DEB002AC20F /* BFTabCircleRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = EC22E92E16CD5DEB002AC20F /* BFTabCircleRenderer.m */; };
+		ECCFD4BF16CC2214006C8101 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECCFD4BE16CC2214006C8101 /* UIKit.framework */; };
+		ECCFD4C116CC2214006C8101 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECCFD4C016CC2214006C8101 /* Foundation.framework */; };
+		ECCFD4C316CC2214006C8101 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECCFD4C216CC2214006C8101 /* CoreGraphics.framework */; };
+		ECCFD4C916CC2214006C8101 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ECCFD4C716CC2214006C8101 /* InfoPlist.strings */; };
+		ECCFD4CB16CC2214006C8101 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ECCFD4CA16CC2214006C8101 /* main.m */; };
+		ECCFD4CF16CC2214006C8101 /* BFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ECCFD4CE16CC2214006C8101 /* BFAppDelegate.m */; };
+		ECCFD4D116CC2214006C8101 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCFD4D016CC2214006C8101 /* Default.png */; };
+		ECCFD4D316CC2214006C8101 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCFD4D216CC2214006C8101 /* Default@2x.png */; };
+		ECCFD4D516CC2214006C8101 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCFD4D416CC2214006C8101 /* Default-568h@2x.png */; };
+		ECCFD4D816CC2214006C8101 /* BFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECCFD4D716CC2214006C8101 /* BFViewController.m */; };
+		ECCFD4DB16CC2214006C8101 /* BFViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECCFD4D916CC2214006C8101 /* BFViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EC22E92A16CD5D7B002AC20F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECCFD4B316CC2214006C8101 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EC22E91D16CD5D6A002AC20F;
+			remoteInfo = BFTabCircle;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EC22E91C16CD5D6A002AC20F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+				EC22E92416CD5D6A002AC20F /* BFTabCircle.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		EC22E91816CD5D56002AC20F /* BFTabCircle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFTabCircle.h; sourceTree = "<group>"; };
+		EC22E91916CD5D56002AC20F /* BFTabCircle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BFTabCircle.m; sourceTree = "<group>"; };
+		EC22E91E16CD5D6A002AC20F /* libBFTabCircle.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBFTabCircle.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC22E92216CD5D6A002AC20F /* BFTabCircle-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BFTabCircle-Prefix.pch"; sourceTree = "<group>"; };
+		EC22E92316CD5D6A002AC20F /* BFTabCircle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFTabCircle.h; sourceTree = "<group>"; };
+		EC22E92516CD5D6A002AC20F /* BFTabCircle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BFTabCircle.m; sourceTree = "<group>"; };
+		EC22E92D16CD5DEB002AC20F /* BFTabCircleRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFTabCircleRenderer.h; sourceTree = "<group>"; };
+		EC22E92E16CD5DEB002AC20F /* BFTabCircleRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFTabCircleRenderer.m; sourceTree = "<group>"; };
+		ECCFD4BB16CC2214006C8101 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECCFD4BE16CC2214006C8101 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		ECCFD4C016CC2214006C8101 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		ECCFD4C216CC2214006C8101 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		ECCFD4C616CC2214006C8101 /* Demo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Demo-Info.plist"; sourceTree = "<group>"; };
+		ECCFD4C816CC2214006C8101 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		ECCFD4CA16CC2214006C8101 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		ECCFD4CC16CC2214006C8101 /* Demo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Demo-Prefix.pch"; sourceTree = "<group>"; };
+		ECCFD4CD16CC2214006C8101 /* BFAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFAppDelegate.h; sourceTree = "<group>"; };
+		ECCFD4CE16CC2214006C8101 /* BFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BFAppDelegate.m; sourceTree = "<group>"; };
+		ECCFD4D016CC2214006C8101 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		ECCFD4D216CC2214006C8101 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		ECCFD4D416CC2214006C8101 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		ECCFD4D616CC2214006C8101 /* BFViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFViewController.h; sourceTree = "<group>"; };
+		ECCFD4D716CC2214006C8101 /* BFViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BFViewController.m; sourceTree = "<group>"; };
+		ECCFD4DA16CC2214006C8101 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BFViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EC22E91B16CD5D6A002AC20F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC22E91F16CD5D6A002AC20F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECCFD4B816CC2214006C8101 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECCFD4BF16CC2214006C8101 /* UIKit.framework in Frameworks */,
+				ECCFD4C116CC2214006C8101 /* Foundation.framework in Frameworks */,
+				ECCFD4C316CC2214006C8101 /* CoreGraphics.framework in Frameworks */,
+				EC22E92C16CD5D81002AC20F /* libBFTabCircle.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EC22E92016CD5D6A002AC20F /* BFTabCircle */ = {
+			isa = PBXGroup;
+			children = (
+				EC22E92316CD5D6A002AC20F /* BFTabCircle.h */,
+				EC22E92516CD5D6A002AC20F /* BFTabCircle.m */,
+				EC22E92116CD5D6A002AC20F /* Supporting Files */,
+			);
+			path = BFTabCircle;
+			sourceTree = "<group>";
+		};
+		EC22E92116CD5D6A002AC20F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EC22E92216CD5D6A002AC20F /* BFTabCircle-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ECCFD4B216CC2214006C8101 = {
+			isa = PBXGroup;
+			children = (
+				ECCFD4E216CC2625006C8101 /* BFTabCircle */,
+				ECCFD4C416CC2214006C8101 /* Demo */,
+				EC22E92016CD5D6A002AC20F /* BFTabCircle */,
+				ECCFD4BD16CC2214006C8101 /* Frameworks */,
+				ECCFD4BC16CC2214006C8101 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ECCFD4BC16CC2214006C8101 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ECCFD4BB16CC2214006C8101 /* Demo.app */,
+				EC22E91E16CD5D6A002AC20F /* libBFTabCircle.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ECCFD4BD16CC2214006C8101 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ECCFD4BE16CC2214006C8101 /* UIKit.framework */,
+				ECCFD4C016CC2214006C8101 /* Foundation.framework */,
+				ECCFD4C216CC2214006C8101 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ECCFD4C416CC2214006C8101 /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				ECCFD4CD16CC2214006C8101 /* BFAppDelegate.h */,
+				ECCFD4CE16CC2214006C8101 /* BFAppDelegate.m */,
+				ECCFD4D616CC2214006C8101 /* BFViewController.h */,
+				ECCFD4D716CC2214006C8101 /* BFViewController.m */,
+				ECCFD4D916CC2214006C8101 /* BFViewController.xib */,
+				ECCFD4C516CC2214006C8101 /* Supporting Files */,
+			);
+			path = Demo;
+			sourceTree = "<group>";
+		};
+		ECCFD4C516CC2214006C8101 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ECCFD4C616CC2214006C8101 /* Demo-Info.plist */,
+				ECCFD4C716CC2214006C8101 /* InfoPlist.strings */,
+				ECCFD4CA16CC2214006C8101 /* main.m */,
+				ECCFD4CC16CC2214006C8101 /* Demo-Prefix.pch */,
+				ECCFD4D016CC2214006C8101 /* Default.png */,
+				ECCFD4D216CC2214006C8101 /* Default@2x.png */,
+				ECCFD4D416CC2214006C8101 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ECCFD4E216CC2625006C8101 /* BFTabCircle */ = {
+			isa = PBXGroup;
+			children = (
+				EC22E91816CD5D56002AC20F /* BFTabCircle.h */,
+				EC22E91916CD5D56002AC20F /* BFTabCircle.m */,
+				EC22E92D16CD5DEB002AC20F /* BFTabCircleRenderer.h */,
+				EC22E92E16CD5DEB002AC20F /* BFTabCircleRenderer.m */,
+			);
+			path = BFTabCircle;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EC22E91D16CD5D6A002AC20F /* BFTabCircle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC22E92716CD5D6A002AC20F /* Build configuration list for PBXNativeTarget "BFTabCircle" */;
+			buildPhases = (
+				EC22E91A16CD5D6A002AC20F /* Sources */,
+				EC22E91B16CD5D6A002AC20F /* Frameworks */,
+				EC22E91C16CD5D6A002AC20F /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BFTabCircle;
+			productName = BFTabCircle;
+			productReference = EC22E91E16CD5D6A002AC20F /* libBFTabCircle.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		ECCFD4BA16CC2214006C8101 /* Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ECCFD4DE16CC2214006C8101 /* Build configuration list for PBXNativeTarget "Demo" */;
+			buildPhases = (
+				ECCFD4B716CC2214006C8101 /* Sources */,
+				ECCFD4B816CC2214006C8101 /* Frameworks */,
+				ECCFD4B916CC2214006C8101 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EC22E92B16CD5D7B002AC20F /* PBXTargetDependency */,
+			);
+			name = Demo;
+			productName = Demo;
+			productReference = ECCFD4BB16CC2214006C8101 /* Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ECCFD4B316CC2214006C8101 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = BF;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Balazs Faludi";
+			};
+			buildConfigurationList = ECCFD4B616CC2214006C8101 /* Build configuration list for PBXProject "Demo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = ECCFD4B216CC2214006C8101;
+			productRefGroup = ECCFD4BC16CC2214006C8101 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ECCFD4BA16CC2214006C8101 /* Demo */,
+				EC22E91D16CD5D6A002AC20F /* BFTabCircle */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ECCFD4B916CC2214006C8101 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECCFD4C916CC2214006C8101 /* InfoPlist.strings in Resources */,
+				ECCFD4D116CC2214006C8101 /* Default.png in Resources */,
+				ECCFD4D316CC2214006C8101 /* Default@2x.png in Resources */,
+				ECCFD4D516CC2214006C8101 /* Default-568h@2x.png in Resources */,
+				ECCFD4DB16CC2214006C8101 /* BFViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EC22E91A16CD5D6A002AC20F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC22E92616CD5D6A002AC20F /* BFTabCircle.m in Sources */,
+				EC22E92F16CD5DEB002AC20F /* BFTabCircleRenderer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECCFD4B716CC2214006C8101 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECCFD4CB16CC2214006C8101 /* main.m in Sources */,
+				ECCFD4CF16CC2214006C8101 /* BFAppDelegate.m in Sources */,
+				ECCFD4D816CC2214006C8101 /* BFViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EC22E92B16CD5D7B002AC20F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EC22E91D16CD5D6A002AC20F /* BFTabCircle */;
+			targetProxy = EC22E92A16CD5D7B002AC20F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		ECCFD4C716CC2214006C8101 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ECCFD4C816CC2214006C8101 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		ECCFD4D916CC2214006C8101 /* BFViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ECCFD4DA16CC2214006C8101 /* en */,
+			);
+			name = BFViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EC22E92816CD5D6A002AC20F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/BFTabCircle.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BFTabCircle/BFTabCircle-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		EC22E92916CD5D6A002AC20F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/BFTabCircle.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BFTabCircle/BFTabCircle-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		ECCFD4DC16CC2214006C8101 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		ECCFD4DD16CC2214006C8101 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ECCFD4DF16CC2214006C8101 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Demo/Demo-Prefix.pch";
+				INFOPLIST_FILE = "Demo/Demo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		ECCFD4E016CC2214006C8101 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Demo/Demo-Prefix.pch";
+				INFOPLIST_FILE = "Demo/Demo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EC22E92716CD5D6A002AC20F /* Build configuration list for PBXNativeTarget "BFTabCircle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC22E92816CD5D6A002AC20F /* Debug */,
+				EC22E92916CD5D6A002AC20F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		ECCFD4B616CC2214006C8101 /* Build configuration list for PBXProject "Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ECCFD4DC16CC2214006C8101 /* Debug */,
+				ECCFD4DD16CC2214006C8101 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ECCFD4DE16CC2214006C8101 /* Build configuration list for PBXNativeTarget "Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ECCFD4DF16CC2214006C8101 /* Debug */,
+				ECCFD4E016CC2214006C8101 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ECCFD4B316CC2214006C8101 /* Project object */;
+}
