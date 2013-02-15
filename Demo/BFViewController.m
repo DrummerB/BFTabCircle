@@ -24,8 +24,8 @@
 	UIPanGestureRecognizer *gr = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
 	[self.view addGestureRecognizer:gr];
 	
-	CGPoint points[4] = {CGPointMake(150, 200), CGPointMake(80, 100), CGPointMake(230, 100), CGPointMake(160, 200)};
-	UIBezierPath *bezier = [BFTabRenderer bezierPathWithPoints:points circleCenter:CGPointMake(155, 205)];
+	CGPoint points[4] = {CGPointMake(20, 200), CGPointMake(20, 100), CGPointMake(120, 200), CGPointMake(20, 200)};
+	UIBezierPath *bezier = [BFTabRenderer bezierPathWithPoints:points circleCenter:CGPointMake(20, 200)];
 	BFBezierButton *b = [[BFBezierButton alloc] initWithBezierPath:bezier];
 	[self.view addSubview:b];
 }

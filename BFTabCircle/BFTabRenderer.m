@@ -45,7 +45,7 @@
 	CGFloat radius = sqrtf(diff.x*diff.x + diff.y*diff.y);
 	CGFloat length = radius * KAPPA;
 	CGFloat angle = atanf(tangentSlope);
-	if (diff.y > 0) orientation *= -1;
+	if (diff.y >= 0) orientation *= -1;
 //	return point;
 	return CGPointMake(point.x + orientation * length * cosf(angle),
 					   point.y + orientation * length * sinf(angle));
