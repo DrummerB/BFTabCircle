@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BFTabCircle.h"
 
 @interface BFViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UIView *controlPoint;
 @property (strong, nonatomic) IBOutlet UIView *centerView;
+@property (nonatomic) BFTabCircle *tabCircle;
 
 @end

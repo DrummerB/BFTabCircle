@@ -27,12 +27,12 @@
     self = [super initWithFrame:CGRectZero];
     if (self) {
 		_outerRadius = 150.0f;
-		_innerRadius = 32.0f;
+		_innerRadius = 30.0f;
 		_verticalOffset = 16.f;
 		self.items = items;
 		[self updateFrame];
-//		self.backgroundColor = [UIColor redColor];
-//		[self hideAnimated:NO];
+		self.backgroundColor = [UIColor clearColor];
+		[self hideAnimated:NO];
     }
     return self;
 }
@@ -64,7 +64,8 @@
 
 - (void)hideAnimated:(BOOL)animated {
 	void (^animationBlock)() = ^{
-		self.transform = CGAffineTransformMakeTranslation(0.01f, 0.01f);
+		CGAffineTransform t = CGAffineTransformMakeTranslation(0.0f, self.bounds.size.height / 2);
+		self.transform = CGAffineTransformScale(t, 0.01f, 0.01f);
 		self.alpha = 0.0f;
 	};
 	if (animated) {
@@ -75,19 +76,22 @@
 }
 
 - (void)drawRect:(CGRect)rect {
-	[[UIColor blueColor] setFill];
-	UIRectFill(self.bounds);
-	[[UIColor redColor] setFill];
-	UIBezierPath *circle = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(self.bounds.size.width / 2.0 - self.innerRadius,
-																			 self.bounds.size.height - self.innerRadius - self.verticalOffset,
-																			 self.innerRadius * 2.0f, self.innerRadius * 2.0f)];
-	[circle fill];
+//	[[UIColor blueColor] setFill];
+//	UIRectFill(self.bounds);
+//	[[UIColor redColor] setFill];
+//	UIBezierPath *circle = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(self.bounds.size.width / 2.0 - self.innerRadius,
+//																			 self.bounds.size.height - self.innerRadius - self.verticalOffset,
+//																			 self.innerRadius * 2.0f, self.innerRadius * 2.0f)];
+//	[circle fill];
 	
 	CGPoint center = CGPointMake(self.outerRadius, self.outerRadius);
 	CGPoint points[4];
-	[self points:points forTabAtIndex:0];
-	UIBezierPath *bezierPath = [BFTabRenderer bezierPathWithPoints:points circleCenter:center];
-	[BFTabRenderer renderTabWithBezierPath:bezierPath];
+	
+	for (int i = 0; i < self.items.count; i++) {
+		[self points:points forTabAtIndex:i];
+		UIBezierPath *bezierPath = [BFTabRenderer bezierPathWithPoints:points circleCenter:center];
+		[BFTabRenderer renderTabWithBezierPath:bezierPath];
+	}
 }
 
 #pragma mark -
