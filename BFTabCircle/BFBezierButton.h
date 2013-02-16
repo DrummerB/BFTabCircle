@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BFBezierButton : UIControl
+@interface BFBezierButton : UIView
 
 @property (nonatomic) UIBezierPath *bezier;
 

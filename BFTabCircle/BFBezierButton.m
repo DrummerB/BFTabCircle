@@ -20,7 +20,10 @@
 {
     self = [super init];
     if (self) {
+		self.backgroundColor = [UIColor clearColor];
+		self.multipleTouchEnabled = NO;
         self.bezier = bezier;
+		
     }
     return self;
 }
@@ -37,5 +40,27 @@
 		_bezier = bezier;
 	}
 }
+
+//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+//	CGPoint location = [[touches anyObject] locationInView:self];
+//	self.highlighted = [self.bezier containsPoint:location];
+//	[[[[touches anyObject] gestureRecognizers] objectAtIndex:0] setCancelsTouchesInView:NO];
+//}
+//
+//- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+//	CGPoint location = [[touches anyObject] locationInView:self];
+//	self.highlighted = [self.bezier containsPoint:location];
+//}
+//
+//- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+//	CGPoint location = [[touches anyObject] locationInView:self];
+//	if([self.bezier containsPoint:location]) {
+//		[self sendActionsForControlEvents:UIControlEventTouchUpInside];
+//	}
+//}
+//
+//- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+//	[self touchesEnded:touches withEvent:event];
+//}
 
 @end

@@ -19,34 +19,43 @@
 //      \    /
 //     0 \--/ 3
 + (UIBezierPath *)bezierPathWithPoints:(CGPoint *)points circleCenter:(CGPoint)center {
-	CGPoint controlPoint1, controlPoint2;
+	CGPoint controlPoints[2];
 	UIBezierPath* bezier3Path = [UIBezierPath bezierPath];
 	[bezier3Path moveToPoint: points[0]];
 	
 	[bezier3Path addCurveToPoint:points[1] controlPoint1:points[1] controlPoint2:points[0]];
 	
-	controlPoint1 = [self controlPointForPoint:points[1] circleCenter:center orientation:BFCircleOrientationClockwise];
-	controlPoint2 = [self controlPointForPoint:points[2] circleCenter:center orientation:BFCircleOrientationCounterClockwise];
-	[bezier3Path addCurveToPoint:points[2] controlPoint1:controlPoint1 controlPoint2:controlPoint2];
+	[self controlPoints:controlPoints forPoint:points[1] andPoint:points[2] center:center];
+	[bezier3Path addCurveToPoint:points[2] controlPoint1:controlPoints[0] controlPoint2:controlPoints[1]];
 	
 	[bezier3Path addCurveToPoint:points[3] controlPoint1:points[3] controlPoint2:points[2]];
 
-	controlPoint1 = [self controlPointForPoint:points[3] circleCenter:center orientation:BFCircleOrientationCounterClockwise];
-	controlPoint2 = [self controlPointForPoint:points[0] circleCenter:center orientation:BFCircleOrientationClockwise];
-	[bezier3Path addCurveToPoint:points[0] controlPoint1:controlPoint1 controlPoint2:controlPoint2];
+	[self controlPoints:controlPoints forPoint:points[0] andPoint:points[3] center:center];
+	[bezier3Path addCurveToPoint:points[0] controlPoint1:controlPoints[1] controlPoint2:controlPoints[0]];
 	
 	[bezier3Path closePath];
 	return bezier3Path;
 }
 
-+ (CGPoint)controlPointForPoint:(CGPoint)point circleCenter:(CGPoint)center orientation:(BFCircleOrientation)orientation {
++ (void)controlPoints:(CGPoint *)controlPoints forPoint:(CGPoint)leftPoint andPoint:(CGPoint)rightPoint center:(CGPoint)center {
+	// Calculate the multiplier to use to get the length of the control point distance.
+//	CGFloat sliceAngle = atanf((rightPoint.y - center.y) / (rightPoint.x - center.x)) - atanf((leftPoint.y - center.y) / (leftPoint.x - center.x));
+	CGFloat l = sqrt(powf(leftPoint.x - center.x, 2) + powf(leftPoint.y - center.y, 2));
+	CGFloat r = sqrt(powf(rightPoint.x - center.x, 2) + powf(rightPoint.y - center.y, 2));
+	CGFloat t = sqrt(powf(rightPoint.x - leftPoint.x, 2) + powf(rightPoint.y - leftPoint.y, 2));
+	CGFloat sliceAngle = acosf((l*l+r*r-t*t)/(2.0f*l*r));
+	CGFloat multiplier = KAPPA * sliceAngle / (M_PI / 2.0f);
+	controlPoints[0] = [self controlPointForPoint:leftPoint center:center multiplier:multiplier orientation:BFCircleOrientationClockwise];
+	controlPoints[1] = [self controlPointForPoint:rightPoint center:center multiplier:multiplier orientation:BFCircleOrientationCounterClockwise];
+}
+
++ (CGPoint)controlPointForPoint:(CGPoint)point center:(CGPoint)center multiplier:(CGFloat)multiplier orientation:(BFCircleOrientation)orientation {
 	CGPoint diff = CGPointMake(point.x - center.x, point.y - center.y);
 	CGFloat tangentSlope = -diff.x / diff.y;
 	CGFloat radius = sqrtf(diff.x*diff.x + diff.y*diff.y);
-	CGFloat length = radius * KAPPA;
+	CGFloat length = radius * multiplier;
 	CGFloat angle = atanf(tangentSlope);
 	if (diff.y >= 0) orientation *= -1;
-//	return point;
 	return CGPointMake(point.x + orientation * length * cosf(angle),
 					   point.y + orientation * length * sinf(angle));
 }

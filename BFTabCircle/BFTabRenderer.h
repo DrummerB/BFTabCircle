@@ -15,7 +15,7 @@ typedef NS_ENUM(NSInteger, BFCircleOrientation) {
 };
 
 @interface BFTabRenderer : NSObject
-+ (CGPoint)controlPointForPoint:(CGPoint)point circleCenter:(CGPoint)center orientation:(BFCircleOrientation)orientation;
+
 + (UIBezierPath *)bezierPathWithPoints:(CGPoint *)points circleCenter:(CGPoint)center;
 + (void)renderTabWithBezierPath:(UIBezierPath *)bezierPath;
 

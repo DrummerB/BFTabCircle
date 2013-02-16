@@ -7,7 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 
-@interface BFTabCircle : NSObject
+@interface BFTabCircle : UIView
+
+@property (nonatomic) NSArray *items;
+@property (nonatomic) CGFloat outerRadius;	// Radius of the tab circle
+@property (nonatomic) CGFloat imageRadius;  // Distance of the tab images' center from the tab circle's center.
+@property (nonatomic) CGFloat innerRadius;  // Radius of the button in the middle.
+@property (nonatomic) CGFloat verticalOffset;  // The distance between the center of the circle and the bottom of the screen.
+@property (nonatomic) BOOL showing;
+
+- (id)initWithItems:(NSArray *)items;
+
+- (void)showAnimated:(BOOL)animated;
+- (void)hideAnimated:(BOOL)animated;
 
 @end

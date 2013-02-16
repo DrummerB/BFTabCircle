@@ -9,6 +9,9 @@
 #import "BFViewController.h"
 #import "BFTabRenderer.h"
 #import "BFBezierButton.h"
+#import "BFTabCircleItem.h"
+#import "BFTabCircle.h"
+#import "BFCircleGeometry.h"
 
 @interface BFViewController ()
 
@@ -24,17 +27,29 @@
 	UIPanGestureRecognizer *gr = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
 	[self.view addGestureRecognizer:gr];
 	
-	CGPoint points[4] = {CGPointMake(20, 200), CGPointMake(20, 100), CGPointMake(120, 200), CGPointMake(20, 200)};
-	UIBezierPath *bezier = [BFTabRenderer bezierPathWithPoints:points circleCenter:CGPointMake(20, 200)];
-	BFBezierButton *b = [[BFBezierButton alloc] initWithBezierPath:bezier];
-	[self.view addSubview:b];
+//	CGPoint points[4] = {CGPointMake(20, 200), CGPointMake(20, 100), CGPointMake(120, 200), CGPointMake(20, 200)};
+//	UIBezierPath *bezier = [BFTabRenderer bezierPathWithPoints:points circleCenter:CGPointMake(20, 200)];
+//	BFBezierButton *b = [[BFBezierButton alloc] initWithBezierPath:bezier];
+//	[self.view addSubview:b];
+	
+	
+	BFTabCircleItem *i1 = [[BFTabCircleItem alloc] initWithImage:nil];
+	BFTabCircleItem *i2 = [[BFTabCircleItem alloc] initWithImage:nil];
+	BFTabCircleItem *i3 = [[BFTabCircleItem alloc] initWithImage:nil];
+	BFTabCircleItem *i4 = [[BFTabCircleItem alloc] initWithImage:nil];
+	BFTabCircleItem *i5 = [[BFTabCircleItem alloc] initWithImage:nil];
+	NSArray *items = @[i1, i2, i3, i4, i5];
+	BFTabCircle *tabCircle = [[BFTabCircle alloc] initWithItems:items];
+	[self.view addSubview:tabCircle];
+	
 }
 
 - (void)handleTap:(UIPanGestureRecognizer *)gr {
 	CGPoint location = [gr locationInView:self.view];
-	self.controlPoint.center = [BFTabRenderer controlPointForPoint:location
-															circleCenter:self.centerView.center
-															 orientation:BFCircleOrientationCounterClockwise];
+	NSLog(@"%f", [BFCircleGeometry angleOfPoint:location onCircleWithCenter:self.centerView.center]);
+//	self.controlPoint.center = [BFTabRenderer controlPointForPoint:location
+//															circleCenter:self.centerView.center
+//															 orientation:BFCircleOrientationCounterClockwise];
 }
 
 - (void)didReceiveMemoryWarning
