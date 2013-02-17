@@ -16,14 +16,26 @@
 	return CGRectMake(0.0f, 0.0f, self.size.width, self.size.height);
 }
 
+- (void)drawAtCenter:(CGPoint)point size:(CGSize)size blendMode:(CGBlendMode)blendMode alpha:(CGFloat)alpha {
+	CGPoint position = CGPointMake(roundf(point.x - size.width / 2.0f), roundf(point.y - size.height / 2.0f));
+	[self drawAtPoint:position blendMode:blendMode alpha:alpha];
+}
+
+- (void)drawAtCenter:(CGPoint)point {
+	[self drawAtCenter:point size:self.size blendMode:kCGBlendModeNormal alpha:1.0f];
+}
+
 - (UIImage *)imageWithEmbossState:(BFEmbossState)state {
-	UIGraphicsBeginImageContext(self.size);
+	UIGraphicsBeginImageContextWithOptions(self.size, NO, self.scale);
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	UIGraphicsPushContext(context);
+	CGContextTranslateCTM(context, 0, self.size.height);
+	CGContextScaleCTM(context, 1.0, -1.0);
 	
 	[self drawEmbossedInRect:self.bounds state:state];
 	
 	UIGraphicsPopContext();
+	
 	UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 	return outputImage;
@@ -59,36 +71,27 @@
 	}
 	
     CGSize size = rect.size;
-    CGFloat dropShadowOffsetY = size.width <= 64.0 ? -1.0 : -2.0;
+    CGFloat dropShadowOffsetY = size.width <= 64.0 ? 1.0 : 2.0;
     CGFloat innerShadowBlurRadius = size.width <= 32.0 ? 1.0 : 4.0;
 	
     CGContextRef c = UIGraphicsGetCurrentContext();
-	
-    //save the current graphics state
+
+    // Save the current graphics state
     CGContextSaveGState(c);
 	
-    //Create mask image:
+    // Create mask image.
     CGRect maskRect = rect;
     CGImageRef maskImage = self.CGImage;
 	
-    //Draw image and white drop shadow:
+    // Draw image and white drop shadow:
 	CGColorRef dropShadowColor = dropShadow.CGColor;
     CGContextSetShadowWithColor(c, CGSizeMake(0, dropShadowOffsetY), 0, dropShadowColor);
-//    [self drawInRect:maskRect fromRect: operation:NSCompositeSourceOver fraction:1.0];
-//	[self drawInRect:CGRectMake(0, 0, self.size.width, self.size.height) blendMode:kCGBlendModeSourceAtop alpha:1.0f];
-//	CGColorRelease(dropShadowColor);
+	CGContextDrawImage(c, CGRectMake(0, 0, self.size.width, self.size.height), self.CGImage);
 	
-    //Clip drawing to mask:
+    // Clip drawing to mask.
     CGContextClipToMask(c, maskRect, maskImage);
 	
-    //Draw gradient:
-//    NSGradient *gradient = [[NSGradient alloc] initWithStartingColor:gradientTop
-//														 endingColor:gradientBottom];
-//    [gradient drawInRect:maskRect angle:90.0];
-//	CGColorRef innerShadowColor = [innerShadow copyCGColor];
-//    CGContextSetShadowWithColor(c, CGSizeMake(0, -1), innerShadowBlurRadius, innerShadowColor);
-//	CGColorRelease(innerShadowColor);
-	
+    // Fill image with gradient.
 	CFMutableArrayRef gradientColors = CFArrayCreateMutable(NULL, 2, &kCFTypeArrayCallBacks);
 	CFArrayAppendValue(gradientColors, gradientTop.CGColor);
 	CFArrayAppendValue(gradientColors, gradientBottom.CGColor);
@@ -97,12 +100,16 @@
 	CFRelease(gradient);
 	CFRelease(gradientColors);
 	
-	return;
-    //Draw inner shadow with inverted mask:
+	CGColorRef innerShadowColor = innerShadow.CGColor;
+    CGContextSetShadowWithColor(c, CGSizeMake(0, 1), innerShadowBlurRadius, innerShadowColor);
+
+    // Draw inner shadow with inverted mask.
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    CGContextRef maskContext = CGBitmapContextCreate(NULL, CGImageGetWidth(maskImage), CGImageGetHeight(maskImage), 8,
-													 CGImageGetWidth(maskImage) * 4, colorSpace, kCGImageAlphaPremultipliedLast);
+	CGSize pixelSize = CGSizeMake(CGImageGetWidth(maskImage) * self.scale, CGImageGetHeight(maskImage) * self.scale);
+    CGContextRef maskContext = CGBitmapContextCreate(NULL, pixelSize.width, pixelSize.height, 8,
+													 pixelSize.width * 4, colorSpace, kCGImageAlphaPremultipliedLast);
     CGColorSpaceRelease(colorSpace);
+	maskRect = CGRectMake(0.0f, 0.0f, maskRect.size.width * self.scale, maskRect.size.height * self.scale);
     CGContextSetBlendMode(maskContext, kCGBlendModeXOR);
     CGContextDrawImage(maskContext, maskRect, maskImage);
     CGContextSetRGBFillColor(maskContext, 1.0, 1.0, 1.0, 1.0);
@@ -112,7 +119,7 @@
     CGImageRelease(invertedMaskImage);
     CGContextRelease(maskContext);
 	
-    //restore the graphics state
+    // Restore the graphics state
     CGContextRestoreGState(c);
 }
 

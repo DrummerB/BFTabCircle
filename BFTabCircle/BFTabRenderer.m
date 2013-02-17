@@ -39,7 +39,6 @@
 
 + (void)controlPoints:(CGPoint *)controlPoints forPoint:(CGPoint)leftPoint andPoint:(CGPoint)rightPoint center:(CGPoint)center {
 	// Calculate the multiplier to use to get the length of the control point distance.
-//	CGFloat sliceAngle = atanf((rightPoint.y - center.y) / (rightPoint.x - center.x)) - atanf((leftPoint.y - center.y) / (leftPoint.x - center.x));
 	CGFloat l = sqrt(powf(leftPoint.x - center.x, 2) + powf(leftPoint.y - center.y, 2));
 	CGFloat r = sqrt(powf(rightPoint.x - center.x, 2) + powf(rightPoint.y - center.y, 2));
 	CGFloat t = sqrt(powf(rightPoint.x - leftPoint.x, 2) + powf(rightPoint.y - leftPoint.y, 2));
@@ -68,7 +67,8 @@
 	//// Color Declarations
 	UIColor* innerShadowColor = [UIColor colorWithRed: 1 green: 1 blue: 1 alpha: 1];
 	UIColor* fillColor = [UIColor colorWithRed: 0.76 green: 0.76 blue: 0.76 alpha: 1];
-	UIColor* strokeColor = [UIColor colorWithRed: 0.92 green: 0.92 blue: 0.92 alpha: 1];
+	UIColor* strokeColor = [UIColor colorWithRed: 0.7 green: 0.7 blue: 0.7 alpha: 1];
+//	UIColor* strokeColor = [UIColor colorWithRed: 0.92 green: 0.92 blue: 0.92 alpha: 1];
 	
 	//// Shadow Declarations
 	UIColor* innerShadow = innerShadowColor;

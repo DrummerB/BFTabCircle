@@ -43,9 +43,11 @@
     if (self) {
 		_outerRadius = 150.0f;
 		_innerRadius = 30.0f;
+		_imageRadius = 110.0f;
 		_verticalOffset = 16.f;
 		_extraInnerAngle = 0.6f;
 		_extraOuterAngle = -0.2f;
+		_extraImageAngle = -0.2f;
 		self.multipleTouchEnabled = NO;
 		self.items = items;
 		self.backgroundColor = [UIColor clearColor];
@@ -107,12 +109,12 @@
 //	
 	for (int i = 0; i < self.itemInfos.count; i++) {
 		BFTabCircleItemInfo *info = self.itemInfos[i];
-//		BFTabCircleItem *item = self.items[i];
+		BFTabCircleItem *item = self.items[i];
 
 		UIBezierPath *bezierPath = info.bezierPath;
 		[BFTabRenderer renderTabWithBezierPath:bezierPath];
 		
-//		[[item.image imageWithEmbossState:BFEmbossStateNormal] drawAtPoint:<#(CGPoint)#>;
+		[[item.image imageWithEmbossState:BFEmbossStateNormal] drawAtCenter:info.iconCenter];
 	}
 }
 
@@ -162,8 +164,8 @@
 	CGPoint center = CGPointMake(self.outerRadius, self.outerRadius);
 	CGPoint outerStart	= CGPointMake(self.bounds.size.width / 2.0f - outerIntersectionX, self.outerRadius + self.verticalOffset);
 	CGPoint outerEnd	= CGPointMake(self.bounds.size.width / 2.0f + outerIntersectionX, self.outerRadius + self.verticalOffset);
-	CGPoint imageStart	= CGPointMake(self.bounds.size.width / 2.0f - imageIntersectionX, self.imageRadius + self.verticalOffset);
-	CGPoint imageEnd	= CGPointMake(self.bounds.size.width / 2.0f + imageIntersectionX, self.imageRadius + self.verticalOffset);
+	CGPoint imageStart	= CGPointMake(self.bounds.size.width / 2.0f - imageIntersectionX, self.outerRadius + self.verticalOffset);
+	CGPoint imageEnd	= CGPointMake(self.bounds.size.width / 2.0f + imageIntersectionX, self.outerRadius + self.verticalOffset);
 	CGPoint innerStart	= CGPointMake(self.bounds.size.width / 2.0f - innerIntersectionX, self.outerRadius + self.verticalOffset);
 	CGPoint innerEnd	= CGPointMake(self.bounds.size.width / 2.0f + innerIntersectionX, self.outerRadius + self.verticalOffset);
 	

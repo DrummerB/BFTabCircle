@@ -18,6 +18,9 @@ typedef NS_ENUM(NSUInteger, BFEmbossState) {
 	BFEmbossStateDefault = BFEmbossStateNormal,
 };
 
+- (void)drawAtCenter:(CGPoint)point size:(CGSize)size blendMode:(CGBlendMode)blendMode alpha:(CGFloat)alpha;
+- (void)drawAtCenter:(CGPoint)point;
+
 - (void)drawEmbossedInRect:(CGRect)rect state:(BFEmbossState)state;
 - (UIImage *)imageWithEmbossState:(BFEmbossState)state;
 

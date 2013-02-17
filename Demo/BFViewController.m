@@ -44,6 +44,7 @@
 	NSArray *items = @[i1, i2, i3, i4, i5];
 	self.tabCircle = [[BFTabCircle alloc] initWithItems:items];
 	[self.view addSubview:self.tabCircle];
+	[self.tabCircle showAnimated:YES];
 	
 }
 
