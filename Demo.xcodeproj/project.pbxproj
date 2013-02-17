@@ -18,6 +18,17 @@
 		EC38EAA316D03D3300768B59 /* BFCircleGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = EC38EAA216D03D3300768B59 /* BFCircleGeometry.m */; };
 		EC53823B16CD8803000733E0 /* BFBezierButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EC53823A16CD8803000733E0 /* BFBezierButton.m */; };
 		EC9D236E16CED50D00295842 /* BFTabCircleItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9D236D16CED50D00295842 /* BFTabCircleItem.m */; };
+		ECC4FD7C16D149E600939564 /* UIImage+BFTabCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = ECC4FD7B16D149E600939564 /* UIImage+BFTabCircle.m */; };
+		ECC4FD7F16D154F200939564 /* 0012.png in Resources */ = {isa = PBXBuildFile; fileRef = ECC4FD7D16D154F200939564 /* 0012.png */; };
+		ECC4FD8016D154F200939564 /* 0012@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ECC4FD7E16D154F200939564 /* 0012@2x.png */; };
+		ECC4FD8316D1550500939564 /* 0015.png in Resources */ = {isa = PBXBuildFile; fileRef = ECC4FD8116D1550500939564 /* 0015.png */; };
+		ECC4FD8416D1550500939564 /* 0015@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ECC4FD8216D1550500939564 /* 0015@2x.png */; };
+		ECC4FD8716D1551300939564 /* 0037.png in Resources */ = {isa = PBXBuildFile; fileRef = ECC4FD8516D1551300939564 /* 0037.png */; };
+		ECC4FD8816D1551300939564 /* 0037@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ECC4FD8616D1551300939564 /* 0037@2x.png */; };
+		ECC4FD8B16D1552100939564 /* 0042.png in Resources */ = {isa = PBXBuildFile; fileRef = ECC4FD8916D1552100939564 /* 0042.png */; };
+		ECC4FD8C16D1552100939564 /* 0042@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ECC4FD8A16D1552100939564 /* 0042@2x.png */; };
+		ECC4FD8F16D1553F00939564 /* 0086.png in Resources */ = {isa = PBXBuildFile; fileRef = ECC4FD8D16D1553F00939564 /* 0086.png */; };
+		ECC4FD9016D1553F00939564 /* 0086@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ECC4FD8E16D1553F00939564 /* 0086@2x.png */; };
 		ECCFD4BF16CC2214006C8101 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECCFD4BE16CC2214006C8101 /* UIKit.framework */; };
 		ECCFD4C116CC2214006C8101 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECCFD4C016CC2214006C8101 /* Foundation.framework */; };
 		ECCFD4C316CC2214006C8101 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECCFD4C216CC2214006C8101 /* CoreGraphics.framework */; };
@@ -70,6 +81,19 @@
 		EC53823A16CD8803000733E0 /* BFBezierButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFBezierButton.m; sourceTree = "<group>"; };
 		EC9D236C16CED50D00295842 /* BFTabCircleItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFTabCircleItem.h; sourceTree = "<group>"; };
 		EC9D236D16CED50D00295842 /* BFTabCircleItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFTabCircleItem.m; sourceTree = "<group>"; };
+		ECC4FD7A16D149E600939564 /* UIImage+BFTabCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+BFTabCircle.h"; sourceTree = "<group>"; };
+		ECC4FD7B16D149E600939564 /* UIImage+BFTabCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BFTabCircle.m"; sourceTree = "<group>"; };
+		ECC4FD7D16D154F200939564 /* 0012.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0012.png; sourceTree = "<group>"; };
+		ECC4FD7E16D154F200939564 /* 0012@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0012@2x.png"; sourceTree = "<group>"; };
+		ECC4FD8116D1550500939564 /* 0015.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0015.png; sourceTree = "<group>"; };
+		ECC4FD8216D1550500939564 /* 0015@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0015@2x.png"; sourceTree = "<group>"; };
+		ECC4FD8516D1551300939564 /* 0037.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0037.png; sourceTree = "<group>"; };
+		ECC4FD8616D1551300939564 /* 0037@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0037@2x.png"; sourceTree = "<group>"; };
+		ECC4FD8916D1552100939564 /* 0042.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0042.png; sourceTree = "<group>"; };
+		ECC4FD8A16D1552100939564 /* 0042@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0042@2x.png"; sourceTree = "<group>"; };
+		ECC4FD8D16D1553F00939564 /* 0086.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0086.png; sourceTree = "<group>"; };
+		ECC4FD8E16D1553F00939564 /* 0086@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0086@2x.png"; sourceTree = "<group>"; };
+		ECC4FD9216D1556900939564 /* License.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = License.txt; sourceTree = "<group>"; };
 		ECCFD4BB16CC2214006C8101 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECCFD4BE16CC2214006C8101 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ECCFD4C016CC2214006C8101 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -132,6 +156,24 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		ECC4FD9116D1554500939564 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				ECC4FD9216D1556900939564 /* License.txt */,
+				ECC4FD7D16D154F200939564 /* 0012.png */,
+				ECC4FD7E16D154F200939564 /* 0012@2x.png */,
+				ECC4FD8116D1550500939564 /* 0015.png */,
+				ECC4FD8216D1550500939564 /* 0015@2x.png */,
+				ECC4FD8516D1551300939564 /* 0037.png */,
+				ECC4FD8616D1551300939564 /* 0037@2x.png */,
+				ECC4FD8916D1552100939564 /* 0042.png */,
+				ECC4FD8A16D1552100939564 /* 0042@2x.png */,
+				ECC4FD8D16D1553F00939564 /* 0086.png */,
+				ECC4FD8E16D1553F00939564 /* 0086@2x.png */,
+			);
+			name = Icons;
+			sourceTree = "<group>";
+		};
 		ECCFD4B216CC2214006C8101 = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +221,7 @@
 		ECCFD4C516CC2214006C8101 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				ECC4FD9116D1554500939564 /* Icons */,
 				ECCFD4C616CC2214006C8101 /* Demo-Info.plist */,
 				ECCFD4C716CC2214006C8101 /* InfoPlist.strings */,
 				ECCFD4CA16CC2214006C8101 /* main.m */,
@@ -203,6 +246,8 @@
 				EC53823A16CD8803000733E0 /* BFBezierButton.m */,
 				EC38EAA116D03D3300768B59 /* BFCircleGeometry.h */,
 				EC38EAA216D03D3300768B59 /* BFCircleGeometry.m */,
+				ECC4FD7A16D149E600939564 /* UIImage+BFTabCircle.h */,
+				ECC4FD7B16D149E600939564 /* UIImage+BFTabCircle.m */,
 			);
 			path = BFTabCircle;
 			sourceTree = "<group>";
@@ -283,6 +328,16 @@
 				ECCFD4D316CC2214006C8101 /* Default@2x.png in Resources */,
 				ECCFD4D516CC2214006C8101 /* Default-568h@2x.png in Resources */,
 				ECCFD4DB16CC2214006C8101 /* BFViewController.xib in Resources */,
+				ECC4FD7F16D154F200939564 /* 0012.png in Resources */,
+				ECC4FD8016D154F200939564 /* 0012@2x.png in Resources */,
+				ECC4FD8316D1550500939564 /* 0015.png in Resources */,
+				ECC4FD8416D1550500939564 /* 0015@2x.png in Resources */,
+				ECC4FD8716D1551300939564 /* 0037.png in Resources */,
+				ECC4FD8816D1551300939564 /* 0037@2x.png in Resources */,
+				ECC4FD8B16D1552100939564 /* 0042.png in Resources */,
+				ECC4FD8C16D1552100939564 /* 0042@2x.png in Resources */,
+				ECC4FD8F16D1553F00939564 /* 0086.png in Resources */,
+				ECC4FD9016D1553F00939564 /* 0086@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +353,7 @@
 				EC53823B16CD8803000733E0 /* BFBezierButton.m in Sources */,
 				EC9D236E16CED50D00295842 /* BFTabCircleItem.m in Sources */,
 				EC38EAA316D03D3300768B59 /* BFCircleGeometry.m in Sources */,
+				ECC4FD7C16D149E600939564 /* UIImage+BFTabCircle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

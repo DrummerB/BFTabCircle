@@ -36,11 +36,11 @@
 //	[self.view addSubview:b];
 	
 	
-	BFTabCircleItem *i1 = [[BFTabCircleItem alloc] initWithImage:nil];
-	BFTabCircleItem *i2 = [[BFTabCircleItem alloc] initWithImage:nil];
-	BFTabCircleItem *i3 = [[BFTabCircleItem alloc] initWithImage:nil];
-	BFTabCircleItem *i4 = [[BFTabCircleItem alloc] initWithImage:nil];
-	BFTabCircleItem *i5 = [[BFTabCircleItem alloc] initWithImage:nil];
+	BFTabCircleItem *i1 = [[BFTabCircleItem alloc] initWithImage:[UIImage imageNamed:@"0037.png"]];
+	BFTabCircleItem *i2 = [[BFTabCircleItem alloc] initWithImage:[UIImage imageNamed:@"0042.png"]];
+	BFTabCircleItem *i3 = [[BFTabCircleItem alloc] initWithImage:[UIImage imageNamed:@"0012.png"]];
+	BFTabCircleItem *i4 = [[BFTabCircleItem alloc] initWithImage:[UIImage imageNamed:@"0015.png"]];
+	BFTabCircleItem *i5 = [[BFTabCircleItem alloc] initWithImage:[UIImage imageNamed:@"0086.png"]];
 	NSArray *items = @[i1, i2, i3, i4, i5];
 	self.tabCircle = [[BFTabCircle alloc] initWithItems:items];
 	[self.view addSubview:self.tabCircle];
