@@ -8,7 +8,6 @@
 
 #import "BFViewController.h"
 #import "BFTabRenderer.h"
-#import "BFBezierButton.h"
 #import "BFTabCircleItem.h"
 #import "BFTabCircle.h"
 #import "BFCircleGeometry.h"

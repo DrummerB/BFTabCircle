@@ -10,21 +10,12 @@
 #import "BFTabRenderer.h"
 #import "BFCircleGeometry.h"
 #import "BFTabCircleItem.h"
-#import "UIImage+BFTabCircle.h"
-
-
-@interface BFTabCircleItemInfo : NSObject
-@property (nonatomic) UIBezierPath *bezierPath;
-@property (nonatomic) CGPoint iconCenter;
-@end
-
-@implementation BFTabCircleItemInfo
-@end
-
+#import "BFTabCircleItemRenderInfo.h"
 
 @interface BFTabCircle ()
 
-@property (nonatomic) NSArray *itemInfos;	// Stores precalculated bezier paths and the location of the icon.
+//@property (nonatomic) NSDictionary *itemInfos;	// Stores precalculated bezier paths and the location of the icon.
+@property (nonatomic) CFMutableDictionaryRef itemInfos;
 @property (nonatomic) CGFloat extraInnerAngle; // Gives the first and last tabs a little mit more space.
 @property (nonatomic) CGFloat extraImageAngle; // Gives the first and last tabs a little mit more space.
 @property (nonatomic) CGFloat extraOuterAngle; // Gives the first and last tabs a little mit more space.
@@ -48,12 +39,20 @@
 		_extraInnerAngle = 0.6f;
 		_extraOuterAngle = -0.2f;
 		_extraImageAngle = -0.2f;
+		
+		self.itemInfos = CFDictionaryCreateMutable(NULL, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+		
 		self.multipleTouchEnabled = NO;
+		self.selectedItem = nil;
 		self.items = items;
 		self.backgroundColor = [UIColor clearColor];
 		[self hideAnimated:NO];
     }
     return self;
+}
+
+- (void)dealloc {
+	CFRelease(self.itemInfos);
 }
 
 #pragma mark -
@@ -107,15 +106,15 @@
 //	CGPoint center = CGPointMake(self.outerRadius, self.outerRadius);
 //	CGPoint points[4];
 //	
-	for (int i = 0; i < self.itemInfos.count; i++) {
-		BFTabCircleItemInfo *info = self.itemInfos[i];
+	for (int i = 0; i < self.items.count; i++) {
 		BFTabCircleItem *item = self.items[i];
-
-		UIBezierPath *bezierPath = info.bezierPath;
-		[BFTabRenderer renderTabWithBezierPath:bezierPath];
-		
-		[[item.image imageWithEmbossState:BFEmbossStateNormal] drawAtCenter:info.iconCenter];
+		BFTabCircleItemRenderInfo *info = [self renderInfoForItem:item];
+		[BFTabRenderer renderTabItem:item withInfo:info];
 	}
+}
+
+- (void)selectItem:(BFTabCircleItem *)item {
+	
 }
 
 #pragma mark -
@@ -132,8 +131,15 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	CGPoint location = [[touches anyObject] locationInView:self];
 	BFTabCircleItem *item = [self itemAtLocation:location];
-	if (item && [self.delegate respondsToSelector:@selector(tabCircle:selectedItem:)]) {
-		[self.delegate tabCircle:self selectedItem:item];
+	if (item) {
+		self.selectedItem = item;
+		BFTabCircleItemRenderInfo *info = [self renderInfoForItem:item];
+		info.state = BFTabStateHighlighted;
+		[self setNeedsDisplay];
+		
+		if ([self.delegate respondsToSelector:@selector(tabCircle:didSelectItem:)]) {
+			[self.delegate tabCircle:self didSelectItem:item];
+		}
 	}
 	[self hideAnimated:YES];
 }
@@ -153,8 +159,15 @@
 	self.frame = CGRectMake(x, y, width, height);
 }
 
+- (BFTabCircleItemRenderInfo *)renderInfoForItem:(BFTabCircleItem *)item {
+	BFTabCircleItemRenderInfo *info = (__bridge BFTabCircleItemRenderInfo *)CFDictionaryGetValue(self.itemInfos, (__bridge const void *)(item));
+	return info;
+}
+
+// Calculate the points that make up every tab slice and the poisitions of the icons.
 - (void)prepareInfos {
-	NSMutableArray *infos = [[NSMutableArray alloc] initWithCapacity:self.items.count];
+//	NSMutableDictionary *infos = [[NSMutableDictionary alloc] initWithCapacity:self.items.count];
+	CFDictionaryRemoveAllValues(self.itemInfos);
 
 	// Calculate the x offset of the intersection of the first and last tab with the bottom of the control.
 	CGFloat innerIntersectionX = sqrtf(self.innerRadius*self.innerRadius - self.verticalOffset*self.verticalOffset);
@@ -218,17 +231,18 @@
 		}
 		
 		UIBezierPath *bezier = [BFTabRenderer bezierPathWithPoints:points circleCenter:center];
-		BFTabCircleItemInfo *info = [[BFTabCircleItemInfo alloc] init];
+		BFTabCircleItemRenderInfo *info = [[BFTabCircleItemRenderInfo alloc] init];
 		info.bezierPath = bezier;
 		info.iconCenter = CGPointMake((imageLeft.x + imageRight.x) / 2.0f, (imageLeft.y + imageRight.y) / 2.0f);
-		[infos addObject:info];
+//		[infos setObject:info forKey:self.items[index]];
+		CFDictionaryAddValue(self.itemInfos, (__bridge const void *)(self.items[index]), (__bridge const void *)(info));
 	}
-	self.itemInfos = [NSArray arrayWithArray:infos];
+//	self.itemInfos = [NSDictionary dictionaryWithDictionary:infos];
 }
 
 - (BFTabCircleItem *)itemAtLocation:(CGPoint)point {
-	for (int i = 0; i < self.itemInfos.count; i++) {
-		BFTabCircleItemInfo *info = self.itemInfos[i];
+	for (int i = 0; i < self.items.count; i++) {
+		BFTabCircleItemRenderInfo *info = [self renderInfoForItem:self.items[i]];
 		UIBezierPath *bezier = info.bezierPath;
 		if ([bezier containsPoint:point]) {
 			return self.items[i];
@@ -238,7 +252,3 @@
 }
 
 @end
-
-
-
-

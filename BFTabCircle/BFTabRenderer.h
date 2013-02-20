@@ -14,9 +14,12 @@ typedef NS_ENUM(NSInteger, BFCircleOrientation) {
 	BFCircleOrientationCounterClockwise = -1
 };
 
+@class BFTabCircleItemRenderInfo;
+@class BFTabCircleItem;
+
 @interface BFTabRenderer : NSObject
 
 + (UIBezierPath *)bezierPathWithPoints:(CGPoint *)points circleCenter:(CGPoint)center;
-+ (void)renderTabWithBezierPath:(UIBezierPath *)bezierPath;
++ (void)renderTabItem:(BFTabCircleItem *)item withInfo:(BFTabCircleItemRenderInfo *)info;
 
 @end

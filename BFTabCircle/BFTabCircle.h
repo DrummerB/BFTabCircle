@@ -10,16 +10,23 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
+typedef NS_ENUM(NSInteger, BFTabState) {
+	BFTabStateNormal,
+	BFTabStateHighlighted,
+	BFTabStateSelected,
+};
+
 @class BFTabCircleItem;
 @protocol BFTabCircleDelegate;
 
 @interface BFTabCircle : UIView
 
 @property (nonatomic) NSArray *items;
-@property (nonatomic) CGFloat outerRadius;	// Radius of the tab circle
-@property (nonatomic) CGFloat imageRadius;  // Distance of the tab images' center from the tab circle's center.
-@property (nonatomic) CGFloat innerRadius;  // Radius of the button in the middle.
-@property (nonatomic) CGFloat verticalOffset;  // The distance between the center of the circle and the bottom of the screen.
+@property (nonatomic, weak) BFTabCircleItem *selectedItem;
+@property (nonatomic) CGFloat outerRadius;		// Radius of the tab circle
+@property (nonatomic) CGFloat imageRadius;		// Distance of the tab images' center from the tab circle's center.
+@property (nonatomic) CGFloat innerRadius;		// Radius of the button in the middle.
+@property (nonatomic) CGFloat verticalOffset;	// The distance between the center of the circle and the bottom of the screen.
 @property (nonatomic) BOOL showing;
 @property (nonatomic, weak) NSObject<BFTabCircleDelegate> *delegate;
 
@@ -33,6 +40,6 @@
 
 @protocol BFTabCircleDelegate <NSObject>
 
-- (void)tabCircle:(BFTabCircle *)tabCircle selectedItem:(BFTabCircleItem *)item;
+- (void)tabCircle:(BFTabCircle *)tabCircle didSelectItem:(BFTabCircleItem *)item;
 
 @end

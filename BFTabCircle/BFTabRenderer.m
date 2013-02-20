@@ -7,6 +7,9 @@
 //
 
 #import "BFTabRenderer.h"
+#import "BFTabCircleItem.h"
+#import "BFTabCircleItemRenderInfo.h"
+#import "UIImage+BFTabCircle.h"
 
 #define KAPPA 0.5522847498
 
@@ -59,25 +62,55 @@
 					   point.y + orientation * length * sinf(angle));
 }
 
-+ (void)renderTabWithBezierPath:(UIBezierPath *)bezierPath {
++ (void)renderTabItem:(BFTabCircleItem *)item withInfo:(BFTabCircleItemRenderInfo *)info {
 	
+	BOOL highlighted = info.state == BFTabStateHighlighted;
+	BOOL selected = info.state == BFTabStateSelected;
+	
+	UIBezierPath *bezierPath = info.bezierPath;
+
 	//// General Declarations
+	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	
 	//// Color Declarations
 	UIColor* innerShadowColor = [UIColor colorWithRed: 1 green: 1 blue: 1 alpha: 1];
-	UIColor* fillColor = [UIColor colorWithRed: 0.76 green: 0.76 blue: 0.76 alpha: 1];
-	UIColor* strokeColor = [UIColor colorWithRed: 0.7 green: 0.7 blue: 0.7 alpha: 1];
-//	UIColor* strokeColor = [UIColor colorWithRed: 0.92 green: 0.92 blue: 0.92 alpha: 1];
+	UIColor* strokeColor = [UIColor colorWithRed: 0.76 green: 0.76 blue: 0.76 alpha: 1];
+	UIColor* fillColor = [UIColor colorWithRed: 0.7 green: 0.7 blue: 0.7 alpha: 1];
+	UIColor* gradientColor = [UIColor colorWithRed: 0.739 green: 0.739 blue: 0.739 alpha: 1];
+	UIColor* gradientColor2 = [UIColor colorWithRed: 0.885 green: 0.885 blue: 0.885 alpha: 1];
+	
+	if (highlighted) {
+		innerShadowColor = [UIColor colorWithRed: 0.404 green: 0.404 blue: 0.404 alpha: 1];
+	}
 	
 	//// Shadow Declarations
 	UIColor* innerShadow = innerShadowColor;
 	CGSize innerShadowOffset = CGSizeMake(0.1, -0.1);
 	CGFloat innerShadowBlurRadius = 1.5;
 	
+	if (highlighted) {
+		innerShadowOffset = CGSizeMake(0.1, 4.1);
+		innerShadowBlurRadius = 12;
+	}
+	
+	//// Gradient Declarations
+	NSArray* gradientColors = [NSArray arrayWithObjects:
+							   (id)gradientColor.CGColor,
+							   (id)gradientColor2.CGColor, nil];
+	CGFloat gradientLocations[] = {0, 1};
+	CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)gradientColors, gradientLocations);
+	
 	//// Bezier 3 Drawing
-	[strokeColor setFill];
-	[bezierPath fill];
+	if (highlighted) {
+		CGContextSaveGState(context);
+		[bezierPath addClip];
+		CGContextDrawLinearGradient(context, gradient, [bezierPath bounds].origin, CGPointMake([bezierPath bounds].origin.x, [bezierPath bounds].origin.y + [bezierPath bounds].size.height), 0);
+		CGContextRestoreGState(context);
+	} else {
+		[fillColor setFill];
+		[bezierPath fill];
+	}
 	
 	////// Bezier 3 Inner Shadow
 	CGRect bezier3BorderRect = CGRectInset([bezierPath bounds], -innerShadowBlurRadius, -innerShadowBlurRadius);
@@ -105,9 +138,14 @@
 	}
 	CGContextRestoreGState(context);
 	
-	[fillColor setStroke];
+	[strokeColor setStroke];
 	bezierPath.lineWidth = 1;
 	[bezierPath stroke];
+	
+	CGGradientRelease(gradient);
+	CGColorSpaceRelease(colorSpace);
+	
+	[[item.image imageWithEmbossState:BFEmbossStateNormal] drawAtCenter:info.iconCenter];
 	
 }
 
