@@ -35,6 +35,8 @@ typedef NS_ENUM(NSInteger, BFTabState) {
 - (void)showAnimated:(BOOL)animated;
 - (void)hideAnimated:(BOOL)animated;
 
+- (void)selectItem:(BFTabCircleItem *)item;
+
 @end
 
 

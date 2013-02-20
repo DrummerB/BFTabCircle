@@ -23,8 +23,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 	
-	UIPanGestureRecognizer *gr = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-	[self.view addGestureRecognizer:gr];
+//	UIPanGestureRecognizer *gr = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+//	[self.view addGestureRecognizer:gr];
 	
 	UITapGestureRecognizer *tg = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
 	[self.view addGestureRecognizer:tg];
@@ -47,13 +47,13 @@
 	
 }
 
-- (void)handlePan:(UIPanGestureRecognizer *)gr {
-	CGPoint location = [gr locationInView:self.view];
-	NSLog(@"%f", [BFCircleGeometry angleOfPoint:location onCircleWithCenter:self.centerView.center]);
-//	self.controlPoint.center = [BFTabRenderer controlPointForPoint:location
-//															circleCenter:self.centerView.center
-//															 orientation:BFCircleOrientationCounterClockwise];
-}
+//- (void)handlePan:(UIPanGestureRecognizer *)gr {
+//	CGPoint location = [gr locationInView:self.view];
+//	NSLog(@"%f", [BFCircleGeometry angleOfPoint:location onCircleWithCenter:self.centerView.center]);
+////	self.controlPoint.center = [BFTabRenderer controlPointForPoint:location
+////															circleCenter:self.centerView.center
+////															 orientation:BFCircleOrientationCounterClockwise];
+//}
 
 - (void)handleTap:(UITapGestureRecognizer *)gr {
 	
