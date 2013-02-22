@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class BFViewController;
+@class BFTabController;
 
 @interface BFAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) BFViewController *viewController;
+@property (strong, nonatomic) BFTabController *viewController;
 
 @end

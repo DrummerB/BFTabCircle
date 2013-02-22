@@ -39,6 +39,8 @@
 		ECCFD4D816CC2214006C8101 /* BFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECCFD4D716CC2214006C8101 /* BFViewController.m */; };
 		ECCFD4DB16CC2214006C8101 /* BFViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECCFD4D916CC2214006C8101 /* BFViewController.xib */; };
 		ECF96F2016D7E26E001D12D5 /* BFTabCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EC22E91916CD5D56002AC20F /* BFTabCircle.m */; };
+		ECF96F2316D7E5BE001D12D5 /* BFTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECF96F2216D7E5BE001D12D5 /* BFTabController.m */; };
+		ECF96F2616D809DF001D12D5 /* BFTabCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = ECF96F2516D809DF001D12D5 /* BFTabCircleButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +107,10 @@
 		ECCFD4D616CC2214006C8101 /* BFViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFViewController.h; sourceTree = "<group>"; };
 		ECCFD4D716CC2214006C8101 /* BFViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BFViewController.m; sourceTree = "<group>"; };
 		ECCFD4DA16CC2214006C8101 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BFViewController.xib; sourceTree = "<group>"; };
+		ECF96F2116D7E5BE001D12D5 /* BFTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFTabController.h; sourceTree = "<group>"; };
+		ECF96F2216D7E5BE001D12D5 /* BFTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFTabController.m; sourceTree = "<group>"; };
+		ECF96F2416D809DF001D12D5 /* BFTabCircleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFTabCircleButton.h; sourceTree = "<group>"; };
+		ECF96F2516D809DF001D12D5 /* BFTabCircleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFTabCircleButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +230,10 @@
 				EC38EAA216D03D3300768B59 /* BFCircleGeometry.m */,
 				ECC4FD7A16D149E600939564 /* UIImage+BFTabCircle.h */,
 				ECC4FD7B16D149E600939564 /* UIImage+BFTabCircle.m */,
+				ECF96F2116D7E5BE001D12D5 /* BFTabController.h */,
+				ECF96F2216D7E5BE001D12D5 /* BFTabController.m */,
+				ECF96F2416D809DF001D12D5 /* BFTabCircleButton.h */,
+				ECF96F2516D809DF001D12D5 /* BFTabCircleButton.m */,
 			);
 			path = BFTabCircle;
 			sourceTree = "<group>";
@@ -330,6 +340,8 @@
 				ECC4FD7C16D149E600939564 /* UIImage+BFTabCircle.m in Sources */,
 				EC8AEA1016D531E8000B4C5B /* BFTabCircleItemRenderInfo.m in Sources */,
 				ECF96F2016D7E26E001D12D5 /* BFTabCircle.m in Sources */,
+				ECF96F2316D7E5BE001D12D5 /* BFTabController.m in Sources */,
+				ECF96F2616D809DF001D12D5 /* BFTabCircleButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
