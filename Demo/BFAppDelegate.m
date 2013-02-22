@@ -18,7 +18,7 @@
 	NSArray *imageNames = @[@"0037.png", @"0042.png", @"0012.png", @"0015.png", @"0086.png"];
 	NSMutableArray *viewControllers = [[NSMutableArray alloc] initWithCapacity:imageNames.count];
 	for (NSString *imageName in imageNames) {
-		UIViewController *vc = [[UIViewController alloc] init];
+		UIViewController *vc = [[UIViewController alloc] initWithNibName:@"BFViewController" bundle:nil];
 		UIImage *image = [UIImage imageNamed:imageName];
 		UITabBarItem *tbi = [[UITabBarItem alloc] initWithTitle:nil image:image tag:0];
 		vc.tabBarItem = tbi;

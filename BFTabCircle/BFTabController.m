@@ -33,8 +33,8 @@
 	[self.view addSubview:self.tabCircle];
 	
 	self.tabButton = [[BFTabCircleButton alloc] initWithWithTabCircle:self.tabCircle];
-	self.tabButton.center = CGPointMake(self.view.bounds.size.width / 2.0f,
-										self.view.bounds.size.height - self.tabButton.frame.size.height / 2.0f);
+//	self.tabButton.center = CGPointMake(self.view.bounds.size.width / 2.0f,
+//										self.view.bounds.size.height - self.tabButton.frame.size.height / 2.0f);
 //	[self.tabButton addTarget:self action:@selector(tabButtonTapped:) forControlEvents:UIControlEventTouchDown];
 	[self.view addSubview:self.tabButton];
 }
@@ -46,7 +46,27 @@
 	if (_viewControllers != viewControllers) {
 		_viewControllers = viewControllers;
 		self.tabCircle.items = [self tabItemsOfViewControllers];
+		self.selectedIndex = 0;
 	}
+}
+
+- (void)setSelectedIndex:(NSInteger)selectedIndex {
+//	if (_selectedIndex != selectedIndex) {
+		[self.selectedViewController.view removeFromSuperview];
+		_selectedIndex = selectedIndex;
+		UIViewController *selectedVC = self.selectedViewController;
+		selectedVC.view.frame = self.view.bounds;
+		[self.view insertSubview:selectedVC.view atIndex:0];
+//	}
+}
+
+- (void)setSelectedViewController:(UIViewController *)selectedViewController {
+	NSInteger newIndex = [self.viewControllers indexOfObject:selectedViewController];
+	[self setSelectedIndex:newIndex];
+}
+
+- (UIViewController *)selectedViewController {
+	return [self.viewControllers objectAtIndex:self.selectedIndex];
 }
 
 #pragma mark -

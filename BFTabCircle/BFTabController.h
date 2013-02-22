@@ -16,5 +16,7 @@
 @property (nonatomic) NSArray *viewControllers;
 @property (nonatomic) BFTabCircle *tabCircle;
 @property (nonatomic) BFTabCircleButton *tabButton;
+@property (nonatomic) NSInteger selectedIndex;
+@property (nonatomic, weak) UIViewController *selectedViewController;
 
 @end

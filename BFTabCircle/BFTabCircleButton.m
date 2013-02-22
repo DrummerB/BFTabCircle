@@ -11,15 +11,30 @@
 
 #define kBFTabCircleButtonDefaultSize 44
 
+
+@interface BFTabCircleButton ()
+@property (nonatomic) CGRect frameBackup;
+@end
+
+@interface BFTabCircle ()
+@property (nonatomic, weak) BFTabCircleButton *tabCircleButton;
+@end
+
 @implementation BFTabCircleButton
 
 - (id)initWithWithTabCircle:(BFTabCircle *)tabCircle
 {
-	CGRect frame = CGRectMake(0, 0, kBFTabCircleButtonDefaultSize, kBFTabCircleButtonDefaultSize);
-    self = [super initWithFrame:frame];
+    self = [super initWithFrame:CGRectZero];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
 		self.tabCircle = tabCircle;
+		
+		CGFloat radius = self.tabCircle.innerRadius;
+		CGFloat y = self.tabCircle.frame.origin.y + self.tabCircle.frame.size.height - self.tabCircle.verticalOffset - radius;
+		CGRect frame = CGRectMake(self.tabCircle.center.x - radius, y, 2.0f * radius, 2.0f * radius);
+		self.frame = frame;
+		
+		[self moveToTabBar];
     }
     return self;
 }
@@ -69,23 +84,55 @@
 	CGColorSpaceRelease(colorSpace);
 }
 
+- (void)setTabCircle:(BFTabCircle *)tabCircle {
+	if (_tabCircle != tabCircle) {
+		_tabCircle = tabCircle;
+		_tabCircle.tabCircleButton = self;
+	}
+}
+
 #pragma mark -
 #pragma mark Event handling
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	[self.tabCircle showAnimated:YES];
+	if (self.tabCircle.showing) {
+		[self.tabCircle hideAnimated:YES];
+	} else {
+		[self.tabCircle showAnimated:YES];
+	}
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-	[self.tabCircle touchesMoved:touches withEvent:event];
+	if (self.tabCircle.showing) {
+		[self.tabCircle touchesMoved:touches withEvent:event];
+	}
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-	[self.tabCircle touchesEnded:touches withEvent:event];
+	if (self.tabCircle.showing) {
+		[self.tabCircle touchesEnded:touches withEvent:event];
+	}
+	
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
 	[self touchesEnded:touches withEvent:event];
+}
+
+#pragma mark -
+#pragma mark Animations
+
+- (void)moveToCircleCenter {
+	self.transform = CGAffineTransformIdentity;
+}
+
+- (void)moveToTabBar {
+	
+	CGFloat scale = kBFTabCircleButtonDefaultSize / 2.0 / self.tabCircle.innerRadius;
+	CGAffineTransform t = CGAffineTransformMakeTranslation(0.0, self.tabCircle.verticalOffset- kBFTabCircleButtonDefaultSize / 2.0f);
+	t = CGAffineTransformScale(t, scale, scale);
+	self.transform = t;
+	
 }
 
 

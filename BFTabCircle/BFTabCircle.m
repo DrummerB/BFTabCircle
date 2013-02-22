@@ -10,6 +10,7 @@
 #import "BFTabRenderer.h"
 #import "BFCircleGeometry.h"
 #import "BFTabCircleItem.h"
+#import "BFTabCircleButton.h"
 #import "BFTabCircleItemRenderInfo.h"
 
 @interface BFTabCircle ()
@@ -20,7 +21,13 @@
 @property (nonatomic) CGFloat extraImageAngle; // Gives the first and last tabs a little mit more space.
 @property (nonatomic) CGFloat extraOuterAngle; // Gives the first and last tabs a little mit more space.
 @property (nonatomic, weak) BFTabCircleItem *highlightedItem;
+@property (nonatomic, weak) BFTabCircleButton *tabCircleButton;
 
+@end
+
+@interface BFTabCircleButton ()
+- (void)moveToCircleCenter;
+- (void)moveToTabBar;
 @end
 
 
@@ -95,12 +102,14 @@
 	void (^animationBlock)() = ^{
 		self.transform = CGAffineTransformIdentity;
 		self.alpha = 1.0f;
+		[self.tabCircleButton moveToCircleCenter];
 	};
 	if (animated) {
 		[UIView animateWithDuration:0.2f animations:animationBlock];
 	} else {
 		animationBlock();
 	}
+	self.showing = YES;
 }
 
 - (void)hideAnimated:(BOOL)animated {
@@ -108,12 +117,14 @@
 		CGAffineTransform t = CGAffineTransformMakeTranslation(0.0f, self.bounds.size.height / 2);
 		self.transform = CGAffineTransformScale(t, 0.01f, 0.01f);
 		self.alpha = 0.0f;
+		[self.tabCircleButton moveToTabBar];
 	};
 	if (animated) {
 		[UIView animateWithDuration:0.2f animations:animationBlock];
 	} else {
 		animationBlock();
 	}
+	self.showing = NO;
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -188,7 +199,7 @@
 	BFTabCircleItem *item = [self itemAtLocation:location];
 	[self selectItem:item];
 	if (item) {
-		[self performSelector:@selector(hideAnimated:) withObject:@1 afterDelay:0.0001f];
+		[self performSelector:@selector(hideAnimated:) withObject:self afterDelay:0.0001f];
 	}
 }
 
