@@ -145,7 +145,7 @@
 	CGGradientRelease(gradient);
 	CGColorSpaceRelease(colorSpace);
 	
-	[[item.image imageWithEmbossState:BFEmbossStateNormal] drawAtCenter:info.iconCenter];
+	[[item.image imageWithEmbossState:info.state] drawAtCenter:info.iconCenter];
 	
 }
 

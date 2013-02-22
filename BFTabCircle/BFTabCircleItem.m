@@ -34,13 +34,4 @@
     return [self initWithTitle:nil image:image tag:0];
 }
 
-//- (id)copyWithZone:(NSZone *)zone {
-//	BFTabCircleItem *copiedObject = [[BFTabCircleItem alloc] initWithTitle:self.title image:self.image tag:self.tag];
-//	return copiedObject;
-//}
-//
-//- (BOOL)isEqual:(BFTabCircleItem *)object {
-//	return [self.image isEqual:object.image] ;
-//}
-
 @end

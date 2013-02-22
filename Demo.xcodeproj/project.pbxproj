@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		EC22E91F16CD5D6A002AC20F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECCFD4C016CC2214006C8101 /* Foundation.framework */; };
-		EC22E92416CD5D6A002AC20F /* BFTabCircle.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC22E92316CD5D6A002AC20F /* BFTabCircle.h */; };
-		EC22E92616CD5D6A002AC20F /* BFTabCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EC22E92516CD5D6A002AC20F /* BFTabCircle.m */; };
 		EC22E92C16CD5D81002AC20F /* libBFTabCircle.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC22E91E16CD5D6A002AC20F /* libBFTabCircle.a */; };
 		EC22E92F16CD5DEB002AC20F /* BFTabRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = EC22E92E16CD5DEB002AC20F /* BFTabRenderer.m */; };
 		EC38EA9D16D0104E00768B59 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC38EA9C16D0104E00768B59 /* QuartzCore.framework */; };
@@ -40,6 +38,7 @@
 		ECCFD4D516CC2214006C8101 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ECCFD4D416CC2214006C8101 /* Default-568h@2x.png */; };
 		ECCFD4D816CC2214006C8101 /* BFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECCFD4D716CC2214006C8101 /* BFViewController.m */; };
 		ECCFD4DB16CC2214006C8101 /* BFViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECCFD4D916CC2214006C8101 /* BFViewController.xib */; };
+		ECF96F2016D7E26E001D12D5 /* BFTabCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EC22E91916CD5D56002AC20F /* BFTabCircle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,7 +58,6 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
-				EC22E92416CD5D6A002AC20F /* BFTabCircle.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,9 +67,6 @@
 		EC22E91816CD5D56002AC20F /* BFTabCircle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFTabCircle.h; sourceTree = "<group>"; };
 		EC22E91916CD5D56002AC20F /* BFTabCircle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BFTabCircle.m; sourceTree = "<group>"; };
 		EC22E91E16CD5D6A002AC20F /* libBFTabCircle.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBFTabCircle.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		EC22E92216CD5D6A002AC20F /* BFTabCircle-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BFTabCircle-Prefix.pch"; sourceTree = "<group>"; };
-		EC22E92316CD5D6A002AC20F /* BFTabCircle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFTabCircle.h; sourceTree = "<group>"; };
-		EC22E92516CD5D6A002AC20F /* BFTabCircle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BFTabCircle.m; sourceTree = "<group>"; };
 		EC22E92D16CD5DEB002AC20F /* BFTabRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFTabRenderer.h; sourceTree = "<group>"; };
 		EC22E92E16CD5DEB002AC20F /* BFTabRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFTabRenderer.m; sourceTree = "<group>"; };
 		EC38EA9C16D0104E00768B59 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -138,24 +133,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		EC22E92016CD5D6A002AC20F /* BFTabCircle */ = {
-			isa = PBXGroup;
-			children = (
-				EC22E92316CD5D6A002AC20F /* BFTabCircle.h */,
-				EC22E92516CD5D6A002AC20F /* BFTabCircle.m */,
-				EC22E92116CD5D6A002AC20F /* Supporting Files */,
-			);
-			path = BFTabCircle;
-			sourceTree = "<group>";
-		};
-		EC22E92116CD5D6A002AC20F /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				EC22E92216CD5D6A002AC20F /* BFTabCircle-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		ECC4FD9116D1554500939564 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
@@ -179,7 +156,6 @@
 			children = (
 				ECCFD4E216CC2625006C8101 /* BFTabCircle */,
 				ECCFD4C416CC2214006C8101 /* Demo */,
-				EC22E92016CD5D6A002AC20F /* BFTabCircle */,
 				ECCFD4BD16CC2214006C8101 /* Frameworks */,
 				ECCFD4BC16CC2214006C8101 /* Products */,
 			);
@@ -348,12 +324,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC22E92616CD5D6A002AC20F /* BFTabCircle.m in Sources */,
 				EC22E92F16CD5DEB002AC20F /* BFTabRenderer.m in Sources */,
 				EC9D236E16CED50D00295842 /* BFTabCircleItem.m in Sources */,
 				EC38EAA316D03D3300768B59 /* BFCircleGeometry.m in Sources */,
 				ECC4FD7C16D149E600939564 /* UIImage+BFTabCircle.m in Sources */,
 				EC8AEA1016D531E8000B4C5B /* BFTabCircleItemRenderInfo.m in Sources */,
+				ECF96F2016D7E26E001D12D5 /* BFTabCircle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

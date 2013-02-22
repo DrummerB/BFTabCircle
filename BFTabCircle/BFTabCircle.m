@@ -136,7 +136,19 @@
 }
 
 - (void)selectItem:(BFTabCircleItem *)item {
-	
+	if (item != self.selectedItem && self.selectedItem) {
+		BFTabCircleItemRenderInfo *selectedInfo = [self renderInfoForItem:self.selectedItem];
+		selectedInfo.state = BFTabStateNormal;
+	}
+	if (item) {
+		BFTabCircleItemRenderInfo *info = [self renderInfoForItem:item];
+		info.state = BFTabStateSelected;
+	}
+	self.selectedItem = item;
+	if ([self.delegate respondsToSelector:@selector(tabCircle:didSelectItem:)]) {
+		[self.delegate tabCircle:self didSelectItem:item];
+	}
+	[self setNeedsDisplay];
 }
 
 - (void)highlightItem:(BFTabCircleItem *)item {
@@ -172,19 +184,12 @@
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-//	CGPoint location = [[touches anyObject] locationInView:self];
-//	BFTabCircleItem *item = [self itemAtLocation:location];
-//	if (item) {
-//		self.selectedItem = item;
-//		BFTabCircleItemRenderInfo *info = [self renderInfoForItem:item];
-//		info.state = BFTabStateHighlighted;
-//		[self setNeedsDisplay];
-//		
-//		if ([self.delegate respondsToSelector:@selector(tabCircle:didSelectItem:)]) {
-//			[self.delegate tabCircle:self didSelectItem:item];
-//		}
-//	}
-//	[self hideAnimated:YES];
+	CGPoint location = [[touches anyObject] locationInView:self];
+	BFTabCircleItem *item = [self itemAtLocation:location];
+	[self selectItem:item];
+	if (item) {
+		[self performSelector:@selector(hideAnimated:) withObject:@1 afterDelay:0.0001f];
+	}
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
