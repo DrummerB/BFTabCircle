@@ -10,4 +10,12 @@
 
 @implementation BFTabCircleItemRenderInfo
 
+- (id)copy {
+	BFTabCircleItemRenderInfo *infoCopy = [[BFTabCircleItemRenderInfo alloc] init];
+	infoCopy.bezierPath = [self.bezierPath copy];
+	infoCopy.iconCenter = self.iconCenter;
+	infoCopy.state = self.state;
+	return infoCopy;
+}
+
 @end

@@ -14,6 +14,7 @@
 		EC38EA9E16D0105400768B59 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECCFD4BE16CC2214006C8101 /* UIKit.framework */; };
 		EC38EA9F16D0105B00768B59 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECCFD4C216CC2214006C8101 /* CoreGraphics.framework */; };
 		EC38EAA316D03D3300768B59 /* BFCircleGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = EC38EAA216D03D3300768B59 /* BFCircleGeometry.m */; };
+		EC75465C16DD4FF800A4FC27 /* BFRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC75465B16DD4FF800A4FC27 /* BFRenderView.m */; };
 		EC8AEA1016D531E8000B4C5B /* BFTabCircleItemRenderInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EC8AEA0F16D531E8000B4C5B /* BFTabCircleItemRenderInfo.m */; };
 		EC9D236E16CED50D00295842 /* BFTabCircleItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9D236D16CED50D00295842 /* BFTabCircleItem.m */; };
 		ECC4FD7C16D149E600939564 /* UIImage+BFTabCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = ECC4FD7B16D149E600939564 /* UIImage+BFTabCircle.m */; };
@@ -74,6 +75,8 @@
 		EC38EA9C16D0104E00768B59 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		EC38EAA116D03D3300768B59 /* BFCircleGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFCircleGeometry.h; sourceTree = "<group>"; };
 		EC38EAA216D03D3300768B59 /* BFCircleGeometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFCircleGeometry.m; sourceTree = "<group>"; };
+		EC75465A16DD4FF800A4FC27 /* BFRenderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFRenderView.h; sourceTree = "<group>"; };
+		EC75465B16DD4FF800A4FC27 /* BFRenderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFRenderView.m; sourceTree = "<group>"; };
 		EC8AEA0E16D531E8000B4C5B /* BFTabCircleItemRenderInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFTabCircleItemRenderInfo.h; sourceTree = "<group>"; };
 		EC8AEA0F16D531E8000B4C5B /* BFTabCircleItemRenderInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFTabCircleItemRenderInfo.m; sourceTree = "<group>"; };
 		EC9D236C16CED50D00295842 /* BFTabCircleItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFTabCircleItem.h; sourceTree = "<group>"; };
@@ -234,6 +237,8 @@
 				ECF96F2216D7E5BE001D12D5 /* BFTabController.m */,
 				ECF96F2416D809DF001D12D5 /* BFTabCircleButton.h */,
 				ECF96F2516D809DF001D12D5 /* BFTabCircleButton.m */,
+				EC75465A16DD4FF800A4FC27 /* BFRenderView.h */,
+				EC75465B16DD4FF800A4FC27 /* BFRenderView.m */,
 			);
 			path = BFTabCircle;
 			sourceTree = "<group>";
@@ -342,6 +347,7 @@
 				ECF96F2016D7E26E001D12D5 /* BFTabCircle.m in Sources */,
 				ECF96F2316D7E5BE001D12D5 /* BFTabController.m in Sources */,
 				ECF96F2616D809DF001D12D5 /* BFTabCircleButton.m in Sources */,
+				EC75465C16DD4FF800A4FC27 /* BFRenderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,6 +483,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Demo/Demo-Prefix.pch";
 				INFOPLIST_FILE = "Demo/Demo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -489,6 +496,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Demo/Demo-Prefix.pch";
 				INFOPLIST_FILE = "Demo/Demo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

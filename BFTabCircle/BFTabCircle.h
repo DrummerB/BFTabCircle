@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "BFRenderView.h"
 
 typedef NS_ENUM(NSInteger, BFTabState) {
 	BFTabStateNormal,
@@ -19,7 +20,8 @@ typedef NS_ENUM(NSInteger, BFTabState) {
 @class BFTabCircleItem;
 @protocol BFTabCircleDelegate;
 
-@interface BFTabCircle : UIView
+// The main view that contains all the tabs.
+@interface BFTabCircle : UIView <BFRenderViewDelegate>
 
 @property (nonatomic) NSArray *items;
 @property (nonatomic, weak) BFTabCircleItem *selectedItem;

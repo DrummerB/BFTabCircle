@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+// Model class that stores info about a tab.
 @interface BFTabCircleItem : NSObject
 
 @property (nonatomic) UIImage *image;

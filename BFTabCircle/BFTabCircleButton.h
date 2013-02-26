@@ -10,6 +10,7 @@
 
 @class BFTabCircle;
 
+// This is the round button in the middle of the tab circle.
 @interface BFTabCircleButton : UIView
 
 @property (nonatomic) BFTabCircle *tabCircle;

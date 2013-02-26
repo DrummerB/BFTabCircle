@@ -12,16 +12,17 @@
 #import "BFTabCircleItem.h"
 #import "BFTabCircleButton.h"
 #import "BFTabCircleItemRenderInfo.h"
+#import "BFRenderView.h"
 
 @interface BFTabCircle ()
 
-//@property (nonatomic) NSDictionary *itemInfos;	// Stores precalculated bezier paths and the location of the icon.
 @property (nonatomic) CFMutableDictionaryRef itemInfos;
 @property (nonatomic) CGFloat extraInnerAngle; // Gives the first and last tabs a little mit more space.
 @property (nonatomic) CGFloat extraImageAngle; // Gives the first and last tabs a little mit more space.
 @property (nonatomic) CGFloat extraOuterAngle; // Gives the first and last tabs a little mit more space.
 @property (nonatomic, weak) BFTabCircleItem *highlightedItem;
 @property (nonatomic, weak) BFTabCircleButton *tabCircleButton;
+@property (nonatomic) NSArray *tabRenderViews; // These views cover every tab for quick display of the prerendered highlighted effect.
 
 @end
 
@@ -72,28 +73,9 @@
 		_items = items;
 		[self updateFrame];
 		[self prepareInfos];
+		[self prepareRenderViews];
 	}
 }
-
-//- (BFTabCircleItem *)selectedItem {
-//	for (BFTabCircleItem *item in self.items) {
-//		BFTabCircleItemRenderInfo *info = [self renderInfoForItem:item];
-//		if (info.state == BFTabStateSelected) {
-//			return item;
-//		}
-//	}
-//	return nil;
-//}
-//
-//- (BFTabCircleItem *)highlightedItem {
-//	for (BFTabCircleItem *item in self.items) {
-//		BFTabCircleItemRenderInfo *info = [self renderInfoForItem:item];
-//		if (info.state == BFTabStateHighlighted) {
-//			return item;
-//		}
-//	}
-//	return nil;
-//}
 
 #pragma mark -
 #pragma mark Presentation
@@ -127,25 +109,6 @@
 	self.showing = NO;
 }
 
-- (void)drawRect:(CGRect)rect {
-//	[[UIColor blueColor] setFill];
-//	UIRectFill(self.bounds);
-//	[[UIColor redColor] setFill];
-//	UIBezierPath *circle = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(self.bounds.size.width / 2.0 - self.innerRadius,
-//																			 self.bounds.size.height - self.innerRadius - self.verticalOffset,
-//																			 self.innerRadius * 2.0f, self.innerRadius * 2.0f)];
-//	[circle fill];
-	
-//	CGPoint center = CGPointMake(self.outerRadius, self.outerRadius);
-//	CGPoint points[4];
-//	
-	for (int i = 0; i < self.items.count; i++) {
-		BFTabCircleItem *item = self.items[i];
-		BFTabCircleItemRenderInfo *info = [self renderInfoForItem:item];
-		[BFTabRenderer renderTabItem:item withInfo:info];
-	}
-}
-
 - (void)selectItem:(BFTabCircleItem *)item {
 	if (item != self.selectedItem && self.selectedItem) {
 		BFTabCircleItemRenderInfo *selectedInfo = [self renderInfoForItem:self.selectedItem];
@@ -166,17 +129,39 @@
 	if (item != self.highlightedItem) {
 		// Unhighlight old item.
 		if (self.highlightedItem) {
-			BFTabCircleItemRenderInfo *highlightedInfo = [self renderInfoForItem:self.highlightedItem];
-			highlightedInfo.state = self.highlightedItem == self.selectedItem ? BFTabStateSelected : BFTabStateNormal;
+//			BFTabCircleItemRenderInfo *highlightedInfo = [self renderInfoForItem:self.highlightedItem];
+//			highlightedInfo.state = self.highlightedItem == self.selectedItem ? BFTabStateSelected : BFTabStateNormal;
+			BFRenderView *renderView = [self renderViewForItem:self.highlightedItem];
+			renderView.hidden = YES;
 		}
 		// Highlight new item.
 		if (item) {
-			BFTabCircleItemRenderInfo *info = [self renderInfoForItem:item];
-			info.state = BFTabStateHighlighted;
+//			BFTabCircleItemRenderInfo *info = [self renderInfoForItem:item];
+//			info.state = BFTabStateHighlighted;
+			BFRenderView *renderView = [self renderViewForItem:item];
+			renderView.hidden = NO;
 		}
 		self.highlightedItem = item;
-		[self setNeedsDisplay];
+//		[self setNeedsDisplay];
 	}
+}
+
+- (void)drawRect:(CGRect)rect {
+	for (int i = 0; i < self.items.count; i++) {
+		BFTabCircleItem *item = self.items[i];
+		BFTabCircleItemRenderInfo *info = [self renderInfoForItem:item];
+		[BFTabRenderer renderTabItem:item withInfo:info];
+	}
+}
+
+- (void)renderView:(BFRenderView *)renderView drawRect:(CGRect)rect {
+	BFTabCircleItem *item = (BFTabCircleItem *)renderView.data;
+	BFTabCircleItemRenderInfo *info = [[self renderInfoForItem:item] copy];
+	CGRect bounds = info.bezierPath.bounds;
+	[info.bezierPath applyTransform:CGAffineTransformMakeTranslation(-bounds.origin.x, -bounds.origin.y)];
+	info.iconCenter = CGPointMake(info.iconCenter.x - bounds.origin.x, info.iconCenter.y - bounds.origin.y);
+	info.state = BFTabStateHighlighted;
+	[BFTabRenderer renderTabItem:item withInfo:info];
 }
 
 #pragma mark -
@@ -199,7 +184,7 @@
 	BFTabCircleItem *item = [self itemAtLocation:location];
 	[self selectItem:item];
 	if (item) {
-		[self performSelector:@selector(hideAnimated:) withObject:self afterDelay:0.0001f];
+		[self hideAnimated:YES];
 	}
 }
 
@@ -223,9 +208,17 @@
 	return info;
 }
 
+- (BFRenderView *)renderViewForItem:(BFTabCircleItem *)item {
+	for (BFRenderView *renderView in self.tabRenderViews) {
+		if (renderView.data == item) {
+			return renderView;
+		}
+	}
+	return nil;
+}
+
 // Calculate the points that make up every tab slice and the poisitions of the icons.
 - (void)prepareInfos {
-//	NSMutableDictionary *infos = [[NSMutableDictionary alloc] initWithCapacity:self.items.count];
 	CFDictionaryRemoveAllValues(self.itemInfos);
 
 	// Calculate the x offset of the intersection of the first and last tab with the bottom of the control.
@@ -293,10 +286,26 @@
 		BFTabCircleItemRenderInfo *info = [[BFTabCircleItemRenderInfo alloc] init];
 		info.bezierPath = bezier;
 		info.iconCenter = CGPointMake((imageLeft.x + imageRight.x) / 2.0f, (imageLeft.y + imageRight.y) / 2.0f);
-//		[infos setObject:info forKey:self.items[index]];
 		CFDictionaryAddValue(self.itemInfos, (__bridge const void *)(self.items[index]), (__bridge const void *)(info));
 	}
-//	self.itemInfos = [NSDictionary dictionaryWithDictionary:infos];
+}
+
+- (void)prepareRenderViews {
+	NSMutableArray *renderViews = [[NSMutableArray alloc] initWithCapacity:self.items.count];
+	for (int i = 0; i < self.items.count; i++) {
+		BFTabCircleItem *item = self.items[i];
+		BFTabCircleItemRenderInfo *info = [self renderInfoForItem:item];
+		CGRect bounds = [info.bezierPath bounds];
+		BFRenderView *renderView = [[BFRenderView alloc] initWithFrame:bounds];
+		renderView.userInteractionEnabled = NO;
+		renderView.backgroundColor = [UIColor clearColor];
+		renderView.hidden = YES;
+		renderView.delegate = self;
+		renderView.data = item;
+		[renderViews addObject:renderView];
+		[self addSubview:renderView];
+	}
+	self.tabRenderViews = [NSArray arrayWithArray:renderViews];
 }
 
 - (BFTabCircleItem *)itemAtLocation:(CGPoint)point {

@@ -62,12 +62,18 @@
 					   point.y + orientation * length * sinf(angle));
 }
 
+// Renders the given item using the specified render info.
 + (void)renderTabItem:(BFTabCircleItem *)item withInfo:(BFTabCircleItemRenderInfo *)info {
 	
 	BOOL highlighted = info.state == BFTabStateHighlighted;
 	BOOL selected = info.state == BFTabStateSelected;
 	
 	UIBezierPath *bezierPath = info.bezierPath;
+	
+//	if (moveToOrigin) {
+//		CGRect bounds = [bezierPath bounds];
+//		[bezierPath applyTransform:CGAffineTransformMakeTranslation(-bounds.origin.x, -bounds.origin.y)];
+//	}
 
 	//// General Declarations
 	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
