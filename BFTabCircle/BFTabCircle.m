@@ -183,6 +183,7 @@
 	CGPoint location = [[touches anyObject] locationInView:self];
 	BFTabCircleItem *item = [self itemAtLocation:location];
 	[self selectItem:item];
+	[self highlightItem:nil];
 	if (item) {
 		[self hideAnimated:YES];
 	}
@@ -309,6 +310,17 @@
 }
 
 - (BFTabCircleItem *)itemAtLocation:(CGPoint)point {
+	// If the point is on the center button, don't select anything.
+	CGPoint center = CGPointMake(self.outerRadius, self.outerRadius);
+	CGFloat distance = sqrtf(powf(point.x - center.x, 2.0f) + powf(point.y - center.y, 2.0f));
+	if (distance < self.innerRadius) {
+		return nil;
+	}
+	
+	// Map the point into the circle area.1
+	CGFloat angle = [BFCircleGeometry angleOfPoint:point onCircleWithCenter:center];
+	point = [BFCircleGeometry pointOnCircleWithCenter:center radius:(self.outerRadius + self.innerRadius) / 2.0f atAngle:angle];
+	
 	for (int i = 0; i < self.items.count; i++) {
 		BFTabCircleItemRenderInfo *info = [self renderInfoForItem:self.items[i]];
 		UIBezierPath *bezier = info.bezierPath;
