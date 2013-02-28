@@ -30,6 +30,7 @@
 	self.view = [[UIView alloc] initWithFrame:rect];
 	
 	self.tabCircle = [[BFTabCircle alloc] initWithItems:[self tabItemsOfViewControllers]];
+	self.tabCircle.delegate = self;
 	[self.view addSubview:self.tabCircle];
 	
 	self.tabButton = [[BFTabCircleButton alloc] initWithWithTabCircle:self.tabCircle];
@@ -67,6 +68,14 @@
 
 - (UIViewController *)selectedViewController {
 	return [self.viewControllers objectAtIndex:self.selectedIndex];
+}
+
+#pragma mark -
+#pragma mark BFTabCircleDelegate
+
+- (void)tabCircle:(BFTabCircle *)tabCircle didSelectItem:(BFTabCircleItem *)item {
+	NSInteger index = [tabCircle.items indexOfObject:item];
+	self.selectedIndex = index;
 }
 
 #pragma mark -

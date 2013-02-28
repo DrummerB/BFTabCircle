@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BFTabCircle.h"
 
-@class BFTabCircle;
 @class BFTabCircleButton;
 
-@interface BFTabController : UIViewController
+@interface BFTabController : UIViewController <BFTabCircleDelegate>
 
 @property (nonatomic) NSArray *viewControllers;
 @property (nonatomic) BFTabCircle *tabCircle;

@@ -22,6 +22,9 @@
 		UIImage *image = [UIImage imageNamed:imageName];
 		UITabBarItem *tbi = [[UITabBarItem alloc] initWithTitle:nil image:image tag:0];
 		vc.tabBarItem = tbi;
+		UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+		imageView.center = CGPointMake(vc.view.bounds.size.width / 2.0f, vc.view.bounds.size.height / 2.0f);
+		[vc.view addSubview:imageView];
 		[viewControllers addObject:vc];
 	}
 	

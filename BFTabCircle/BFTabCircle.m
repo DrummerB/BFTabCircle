@@ -119,7 +119,7 @@
 		info.state = BFTabStateSelected;
 	}
 	self.selectedItem = item;
-	if ([self.delegate respondsToSelector:@selector(tabCircle:didSelectItem:)]) {
+	if (item && [self.delegate respondsToSelector:@selector(tabCircle:didSelectItem:)]) {
 		[self.delegate tabCircle:self didSelectItem:item];
 	}
 	[self setNeedsDisplay];
@@ -129,20 +129,15 @@
 	if (item != self.highlightedItem) {
 		// Unhighlight old item.
 		if (self.highlightedItem) {
-//			BFTabCircleItemRenderInfo *highlightedInfo = [self renderInfoForItem:self.highlightedItem];
-//			highlightedInfo.state = self.highlightedItem == self.selectedItem ? BFTabStateSelected : BFTabStateNormal;
 			BFRenderView *renderView = [self renderViewForItem:self.highlightedItem];
 			renderView.hidden = YES;
 		}
 		// Highlight new item.
 		if (item) {
-//			BFTabCircleItemRenderInfo *info = [self renderInfoForItem:item];
-//			info.state = BFTabStateHighlighted;
 			BFRenderView *renderView = [self renderViewForItem:item];
 			renderView.hidden = NO;
 		}
 		self.highlightedItem = item;
-//		[self setNeedsDisplay];
 	}
 }
 
