@@ -18,6 +18,8 @@
 
 @interface BFTabCircle ()
 @property (nonatomic, weak) BFTabCircleButton *tabCircleButton;
+- (void)showAnimated:(BOOL)animated notifyDelegate:(BOOL)notify;
+- (void)hideAnimated:(BOOL)animated notifyDelegate:(BOOL)notify;
 @end
 
 @implementation BFTabCircleButton
@@ -96,9 +98,9 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	if (self.tabCircle.showing) {
-		[self.tabCircle hideAnimated:YES];
+		[self.tabCircle hideAnimated:YES notifyDelegate:YES];
 	} else {
-		[self.tabCircle showAnimated:YES];
+		[self.tabCircle showAnimated:YES notifyDelegate:YES];
 	}
 }
 

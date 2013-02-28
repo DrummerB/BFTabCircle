@@ -109,6 +109,20 @@
 	self.showing = NO;
 }
 
+- (void)showAnimated:(BOOL)animated notifyDelegate:(BOOL)notify {
+	if (notify && [self.delegate respondsToSelector:@selector(tabCircleWillAppear:)]) {
+		[self.delegate tabCircleWillAppear:self];
+	}
+	[self showAnimated:animated];
+}
+
+- (void)hideAnimated:(BOOL)animated notifyDelegate:(BOOL)notify {
+	if (notify && [self.delegate respondsToSelector:@selector(tabCircleWillDisappear:)]) {
+		[self.delegate tabCircleWillDisappear:self];
+	}
+	[self hideAnimated:animated];
+}
+
 - (void)selectItem:(BFTabCircleItem *)item {
 	if (item != self.selectedItem && self.selectedItem) {
 		BFTabCircleItemRenderInfo *selectedInfo = [self renderInfoForItem:self.selectedItem];
@@ -180,7 +194,7 @@
 	[self selectItem:item];
 	[self highlightItem:nil];
 	if (item) {
-		[self hideAnimated:YES];
+		[self hideAnimated:YES notifyDelegate:YES];
 	}
 }
 

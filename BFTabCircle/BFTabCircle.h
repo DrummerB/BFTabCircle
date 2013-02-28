@@ -45,5 +45,7 @@ typedef NS_ENUM(NSInteger, BFTabState) {
 @protocol BFTabCircleDelegate <NSObject>
 
 - (void)tabCircle:(BFTabCircle *)tabCircle didSelectItem:(BFTabCircleItem *)item;
+- (void)tabCircleWillAppear:(BFTabCircle *)tabCircle;
+- (void)tabCircleWillDisappear:(BFTabCircle *)tabCircle;
 
 @end

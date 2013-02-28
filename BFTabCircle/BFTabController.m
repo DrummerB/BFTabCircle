@@ -15,6 +15,8 @@
 
 @interface BFTabController ()
 
+@property (nonatomic) UIView *coverView;
+
 @end
 
 @implementation BFTabController
@@ -34,9 +36,7 @@
 	[self.view addSubview:self.tabCircle];
 	
 	self.tabButton = [[BFTabCircleButton alloc] initWithWithTabCircle:self.tabCircle];
-//	self.tabButton.center = CGPointMake(self.view.bounds.size.width / 2.0f,
-//										self.view.bounds.size.height - self.tabButton.frame.size.height / 2.0f);
-//	[self.tabButton addTarget:self action:@selector(tabButtonTapped:) forControlEvents:UIControlEventTouchDown];
+
 	[self.view addSubview:self.tabButton];
 }
 
@@ -52,13 +52,12 @@
 }
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
-//	if (_selectedIndex != selectedIndex) {
-		[self.selectedViewController.view removeFromSuperview];
-		_selectedIndex = selectedIndex;
-		UIViewController *selectedVC = self.selectedViewController;
-		selectedVC.view.frame = self.view.bounds;
-		[self.view insertSubview:selectedVC.view atIndex:0];
-//	}
+
+	[self.selectedViewController.view removeFromSuperview];
+	_selectedIndex = selectedIndex;
+	UIViewController *selectedVC = self.selectedViewController;
+	selectedVC.view.frame = self.view.bounds;
+	[self.view insertSubview:selectedVC.view atIndex:0];
 }
 
 - (void)setSelectedViewController:(UIViewController *)selectedViewController {
@@ -76,6 +75,50 @@
 - (void)tabCircle:(BFTabCircle *)tabCircle didSelectItem:(BFTabCircleItem *)item {
 	NSInteger index = [tabCircle.items indexOfObject:item];
 	self.selectedIndex = index;
+}
+
+- (void)tabCircleWillAppear:(BFTabCircle *)tabCircle {
+	[self showCoverView];
+}
+
+- (void)tabCircleWillDisappear:(BFTabCircle *)tabCircle {
+	[self hideCoverView];
+}
+
+#pragma mark -
+#pragma mark CoverView
+
+- (void)showCoverView {
+	self.coverView = [[UIView alloc] initWithFrame:self.view.bounds];
+	self.coverView.backgroundColor = [UIColor blackColor];
+	self.coverView.alpha = 0.0f;
+	UITapGestureRecognizer *gr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapOnCoverView:)];
+	[self.coverView addGestureRecognizer:gr];
+	NSInteger index = MAX(0, MIN([self.view.subviews indexOfObject:self.tabCircle], [self.view.subviews indexOfObject:self.tabButton]));
+	[self.view insertSubview:self.coverView atIndex:index];
+	
+	[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+	[UIView animateWithDuration:0.2f animations:^{
+		self.coverView.alpha = 0.5f;
+	} completion:^(BOOL finished) {
+		[[UIApplication sharedApplication] endIgnoringInteractionEvents];
+	}];
+}
+
+- (void)hideCoverView {
+	[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+	[UIView animateWithDuration:0.2f animations:^{
+		self.coverView.alpha = 0.0f;
+	} completion:^(BOOL finished) {
+		[self.coverView removeFromSuperview];
+		self.coverView = nil;
+		[[UIApplication sharedApplication] endIgnoringInteractionEvents];
+	}];
+}
+
+- (void)handleTapOnCoverView:(UITapGestureRecognizer *)recognizer {
+	[self.tabCircle hideAnimated:YES];
+	[self hideCoverView];
 }
 
 #pragma mark -
@@ -96,9 +139,5 @@
 	}
 	return [NSArray arrayWithArray:items];
 }
-
-//- (void)tabButtonTapped:(id)sender {
-//	[self.tabCircle showAnimated:YES];
-//}
 
 @end
