@@ -291,7 +291,7 @@
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Balazs Faludi";
 			};
-			buildConfigurationList = ECCFD4B616CC2214006C8101 /* Build configuration list for PBXProject "Demo" */;
+			buildConfigurationList = ECCFD4B616CC2214006C8101 /* Build configuration list for PBXProject "BFTabCircle" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -515,7 +515,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ECCFD4B616CC2214006C8101 /* Build configuration list for PBXProject "Demo" */ = {
+		ECCFD4B616CC2214006C8101 /* Build configuration list for PBXProject "BFTabCircle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ECCFD4DC16CC2214006C8101 /* Debug */,
