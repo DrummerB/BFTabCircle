@@ -69,7 +69,8 @@
 	[self updateFrame];
 	[self prepareInfos];
 	[self prepareRenderViews];
-	[self hideAnimated:NO];
+	[self setNeedsDisplay];
+	self.hidden = YES;
 }
 
 #pragma mark -
@@ -153,7 +154,7 @@
 	if (item && [self.delegate respondsToSelector:@selector(tabCircle:didSelectItem:)]) {
 		[self.delegate tabCircle:self didSelectItem:item];
 	}
-	[self setNeedsDisplay];
+//	[self setNeedsDisplay];
 }
 
 - (void)highlightItem:(BFTabCircleItem *)item {
