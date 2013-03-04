@@ -48,21 +48,28 @@
 		_extraInnerAngle = 0.6f;
 		_extraOuterAngle = -0.2f;
 		_extraImageAngle = -0.2f;
-		
+		_items = items;
+
 		self.itemInfos = CFDictionaryCreateMutable(NULL, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 		
 		self.multipleTouchEnabled = NO;
 		self.selectedItem = nil;
 		self.highlightedItem = nil;
-		self.items = items;
 		self.backgroundColor = [UIColor clearColor];
-		[self hideAnimated:NO];
+		
     }
     return self;
 }
 
 - (void)dealloc {
 	CFRelease(self.itemInfos);
+}
+
+- (void)didMoveToSuperview {
+	[self updateFrame];
+	[self prepareInfos];
+	[self prepareRenderViews];
+	[self hideAnimated:NO];
 }
 
 #pragma mark -
@@ -81,6 +88,12 @@
 #pragma mark Presentation
 
 - (void)showAnimated:(BOOL)animated {
+	self.transform = CGAffineTransformIdentity;
+	[self updateFrame];
+	CGAffineTransform t = CGAffineTransformMakeTranslation(0.0f, self.bounds.size.height / 2);
+	self.transform = CGAffineTransformScale(t, 0.01f, 0.01f);
+	self.alpha = 0.0f;
+	self.hidden = NO;
 	void (^animationBlock)() = ^{
 		self.transform = CGAffineTransformIdentity;
 		self.alpha = 1.0f;
@@ -101,8 +114,12 @@
 		self.alpha = 0.0f;
 		[self.tabCircleButton moveToTabBar];
 	};
+	void (^completionBlock)(BOOL finished) = ^(BOOL finished) {
+		self.hidden = YES;
+		self.transform = CGAffineTransformIdentity;
+	};
 	if (animated) {
-		[UIView animateWithDuration:0.2f animations:animationBlock];
+		[UIView animateWithDuration:0.2f animations:animationBlock completion:completionBlock];
 	} else {
 		animationBlock();
 	}
@@ -206,11 +223,13 @@
 #pragma mark Convenience Methods
 
 - (void)updateFrame {
-	CGFloat height = self.outerRadius + self.verticalOffset;
-	CGFloat width = 2.0f * self.outerRadius;
-	CGFloat x = [[UIScreen mainScreen] applicationFrame].size.width / 2.0f - self.outerRadius;
-	CGFloat y = [[UIScreen mainScreen] applicationFrame].size.height - height;
-	self.frame = CGRectMake(x, y, width, height);
+	if (self.superview) {
+		CGFloat height = self.outerRadius + self.verticalOffset;
+		CGFloat width = 2.0f * self.outerRadius;
+		CGFloat x = self.superview.bounds.size.width / 2.0f - self.outerRadius;
+		CGFloat y = self.superview.bounds.size.height - height;
+		self.frame = CGRectMake(x, y, width, height);
+	}
 }
 
 - (BFTabCircleItemRenderInfo *)renderInfoForItem:(BFTabCircleItem *)item {

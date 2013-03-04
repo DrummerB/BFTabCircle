@@ -29,14 +29,16 @@
 
 - (void)loadView {
 	CGRect rect = [[UIScreen mainScreen] applicationFrame];
+	rect = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height - 88);
 	self.view = [[UIView alloc] initWithFrame:rect];
 	
 	self.tabCircle = [[BFTabCircle alloc] initWithItems:[self tabItemsOfViewControllers]];
+	self.tabCircle.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
 	self.tabCircle.delegate = self;
 	[self.view addSubview:self.tabCircle];
 	
 	self.tabButton = [[BFTabCircleButton alloc] initWithWithTabCircle:self.tabCircle];
-
+	self.tabButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
 	[self.view addSubview:self.tabButton];
 }
 
