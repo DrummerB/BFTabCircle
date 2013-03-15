@@ -55,12 +55,22 @@
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
 
+	// Replace the old view controller's view with the new one.
 	[self.selectedViewController.view removeFromSuperview];
+	[self.selectedViewController removeFromParentViewController];
 	_selectedIndex = selectedIndex;
 	UIViewController *selectedVC = self.selectedViewController;
 	selectedVC.view.frame = self.view.bounds;
+	[self addChildViewController:selectedVC];
 	[self.view insertSubview:selectedVC.view atIndex:0];
+	
+	// Replace the navigation item, if the tab controller is in a navigation controller.
+	[self updateNavigationItem];
 }
+
+//- (UINavigationItem *)navigationItem {
+//	return self.selectedViewController.navigationItem;
+//}
 
 - (void)setSelectedViewController:(UIViewController *)selectedViewController {
 	NSInteger newIndex = [self.viewControllers indexOfObject:selectedViewController];
@@ -140,6 +150,32 @@
 		}
 	}
 	return [NSArray arrayWithArray:items];
+}
+
+// Update the tab controller's navigation item to represent the currently selected view controller's navigation item.
+// Unfortunately navigationItem is readonly, we have to set each property individually.
+- (void)updateNavigationItem
+{
+	UINavigationItem *navItem = self.selectedViewController.navigationItem;
+    self.navigationItem.title = navItem.title;
+    self.navigationItem.prompt = navItem.prompt;
+    self.navigationItem.hidesBackButton = navItem.hidesBackButton;
+    if (navItem.backBarButtonItem != nil)
+    {
+        self.navigationItem.backBarButtonItem = navItem.backBarButtonItem;
+    }
+    if (navItem.leftBarButtonItem != nil)
+    {
+        self.navigationItem.leftBarButtonItem = navItem.leftBarButtonItem;
+    }
+    if (navItem.rightBarButtonItem != nil)
+    {
+        self.navigationItem.rightBarButtonItem = navItem.rightBarButtonItem;
+    }
+    if (navItem.titleView != nil)
+    {
+        self.navigationItem.titleView = navItem.titleView;
+    }
 }
 
 @end
