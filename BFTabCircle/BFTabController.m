@@ -61,6 +61,7 @@
 	_selectedIndex = selectedIndex;
 	UIViewController *selectedVC = self.selectedViewController;
 	selectedVC.view.frame = self.view.bounds;
+	selectedVC.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 	[self addChildViewController:selectedVC];
 	[self.view insertSubview:selectedVC.view atIndex:0];
 	
@@ -160,22 +161,11 @@
     self.navigationItem.title = navItem.title;
     self.navigationItem.prompt = navItem.prompt;
     self.navigationItem.hidesBackButton = navItem.hidesBackButton;
-    if (navItem.backBarButtonItem != nil)
-    {
-        self.navigationItem.backBarButtonItem = navItem.backBarButtonItem;
-    }
-    if (navItem.leftBarButtonItem != nil)
-    {
-        self.navigationItem.leftBarButtonItem = navItem.leftBarButtonItem;
-    }
-    if (navItem.rightBarButtonItem != nil)
-    {
-        self.navigationItem.rightBarButtonItem = navItem.rightBarButtonItem;
-    }
-    if (navItem.titleView != nil)
-    {
-        self.navigationItem.titleView = navItem.titleView;
-    }
+	self.navigationItem.backBarButtonItem = navItem.backBarButtonItem;
+	self.navigationItem.leftBarButtonItem = navItem.leftBarButtonItem;
+	self.navigationItem.rightBarButtonItem = navItem.rightBarButtonItem;
+	self.navigationItem.titleView = navItem.titleView;
+    
 }
 
 @end
